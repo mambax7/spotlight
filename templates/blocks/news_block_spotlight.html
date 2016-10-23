@@ -1,0 +1,158 @@
+<!--Single Column Template-->
+<{if $block.select_template != "1"}>
+<div class="item">
+  <div class="itemTitle">
+    <{if $block.storyid != "0"}><a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><{$block.newstitle}></a>
+    <{else}><{$block.newstitle}><{/if}>
+  </div>
+  <div class="itemInfo">
+    <{if $block.storyid != "0"}><{$block.lang_by}> <{$block.author}><{/if}>
+  </div>
+  <div class="itemBody">
+    <{if $block.image != ""}>
+    <div align="<{$block.imagealign}>" style="float:<{$block.imagealign}>;"><a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><img src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>" alt="<{$block.newstitle}>" title="<{$block.newstitle}>" width="<{$block.imgwidth}>" height="<{$block.imgheight}>" /></a></div>
+    <{/if}>
+    <{$block.hometext_news}>
+  </div><div style="clear: both;"></div>
+  <div class="itemFoot">
+    <{if $block.storyid != 0}>
+      <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><{$block.lang_read}></a>
+ &nbsp;|&nbsp;<{$block.comments}>&nbsp;<{$block.lang_comments}>&nbsp;| <a href="<{$xoops_url}>/modules/news/comment_new.php?com_itemid=<{$block.storyid}>"><{$block.lang_write}></a>
+    <{/if}>
+  </div>
+  <{if $block.lang_other_news !=""}>
+    <table><tr>
+    <{counter assign=count start=0 print=false}>
+    <{foreach item=topic from=$block.topics}>
+    <{counter}>
+    <td><div class="item">
+      <div class="itemHead" style="border: 1px solid #CCCCCC; display: block;"><{$topic.textlink}></div>
+      <div class="itemTopicImage"><{$topic.imglink}></div>
+      <{foreach item=news from=$topic.stories}>
+        <div class="itemBody"><a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$news.id}>"><{$news.title}></a>&nbsp;<span class="itemStats">(<{$news.hitsordate}>)</span></div>
+        <{$news.hometext}>
+      <{/foreach}>
+    </div></td>
+      <{if $count mod 2==0}></tr><tr><{/if}>
+    <{/foreach}><td></td></tr></table>
+    <{else}>
+    <div class="itemBody"><{$block.hometext_news}></div>
+  <{/if}>
+  <{if $block.topicsel != ""}><div class=""><{$block.topicsel}></div><{/if}>
+  <{if $block.lang_ministats != ""}><div class=""><{$block.lang_ministats}>&nbsp;<{$block.ministats}></div><{/if}>
+</div>
+<{else}>  
+  
+<table width="100%" border="0" cellspacing="1" cellpadding="2">
+  <tr align="left">
+    <td style="line-height: 16px;" colspan="3">  
+      <{if $block.storyid != "0"}>
+      <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>">
+        <div class="itemHead"><span class="itemTitle"><{$block.newstitle}></span></div>              
+      </a>
+      <{else}>
+      <{$block.newstitle}>
+      <{/if}>
+    </td>
+  </tr>
+  <tr align="left">
+    <{if $block.storyid != "0"}>
+    <td colspan="2" style="line-height: 10px;">
+        <div class= 'even'>
+            
+             <span class="itemPoster"><b><{$block.lang_by}></b> <a href="<{$xoops_url}>/userinfo.php?uid=<{$block.uid}>"><{$block.author}></a></span></div>
+            
+    </td>
+    <{/if}>
+  </tr>
+  <tr align="left">
+    <td colspan="2" style="line-height: 10px;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="55%" valign="top">
+      <table width="100%" border="0" cellspacing="0" cellpadding="2">
+        <tr>
+          <td>
+            <{if $block.image != ""}>
+            <div align="<{$block.imagealign}>">
+                    <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><img src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>" alt="<{$block.newstitle}>" width="<{$block.imgwidth}>"  height="<{$block.imgheight}>" /></a>            
+            </div>
+            <{/if}>
+          </td>
+        </tr>
+        <tr> <{if $block.lang_other_news !=""}>
+          <td>
+            <p align=justify>
+                <span style="float:left; margin-right: 10px; ">
+            <{$block.hometext_news}>
+            </span>
+            </p>
+          </td>
+          <{/if}> </tr>
+        <tr>
+          <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+          <{if $block.storyid != "0"}>
+          <td align="left">
+            <small>
+            <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><{$block.lang_read}></a>
+            <!-- Only registered users see comments -->
+            <{if $xoops_userid != ""}> &nbsp;|&nbsp;<{$block.comments}>&nbsp;<{$block.lang_comments}>&nbsp;|
+            <a href="<{$xoops_url}>/modules/news/comment_new.php?com_itemid=<{$block.storyid}>">
+            <{$block.lang_write}> </a> <{/if}></small>
+          </td>
+          <{/if}>
+        </tr>
+      </table>
+    </td>
+    <td rowspan= '3' valign="top"> <{if $block.lang_other_news !=""}>
+     <{foreach item=topic from=$block.topics}>
+      <table width="100%" border="0" cellspacing="1" cellpadding="2">
+        <tr>
+          <td style="line-height: 10px;" align="left" colspan=2>
+            <div class = 'head' style="margin-bottom: 0px; padding-left: 2px;">
+              <div align="left"><b><{$topic.textlink}></b></div>
+            </div>          </td>
+        </tr>
+    <tr>
+    <td><{$topic.imglink}></td>
+        <td height="100%">
+            <{foreach item=news from=$topic.stories}>
+            <table width="100%"  border="0" cellspacing="1" cellpadding="2">
+                  <tr>
+                    <td style="line-height: 12px;"><li><a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$news.id}>"><{$news.title}></a>&nbsp;(<{$news.hitsordate}>)</li></td>
+                  </tr>
+                  <tr>
+                    <td><div style="margin-bottom: 1px; margin-left: 16px;"><{$news.hometext}></div>
+                    </td>
+                  </tr>
+            </table>
+            <{/foreach}>
+        </td>
+        </tr>
+      </table>
+     <{/foreach}>
+      <{else}>
+      <table width="100%" border="0" cellspacing="1" cellpadding="2" >
+        <tr>
+          <td ><{$block.hometext_news}></td>
+        </tr>
+      </table>
+    <{/if}>    </td>
+  </tr>
+  <tr></tr>
+  <tr></tr>
+  <tr>
+    <td> </td>
+    <td align="center" style="padding: 6px 0 0px 0;"><{$block.topicsel}></td>
+  </tr>
+  <{if $block.lang_ministats != ""}>
+  <tr valign="middle">
+    <td colspan="2">
+      <div align = 'center' class = 'even' style="line-height: 10px; "><small><b><{$block.lang_ministats}>&nbsp;</b><{$block.ministats}></small></div>
+    </td>
+  </tr>
+  <{/if}>
+</table>
+<{/if}>
