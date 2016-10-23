@@ -29,14 +29,14 @@ function spotlight_show_news($options)
 
     $modhandler        = xoops_getHandler('module');
     $xoopsModule       = $modhandler->getByDirname('spotlight');
-    $config_handler    = xoops_getHandler('config');
-    $xoopsModuleConfig = $config_handler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
+    $configHandler    = xoops_getHandler('config');
+    $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     /**
      * Mini Spotlights
      */
-    $minis_handler = xoops_getModuleHandler('mini', 'spotlight');
-    if ($minis =& $minis_handler->getObjects()) {
+    $minisHandler = xoops_getModuleHandler('mini', 'spotlight');
+    if ($minis =& $minisHandler->getObjects()) {
         $block['mini'] = array();
         $excludes      = array();
         foreach ($minis as $m) {

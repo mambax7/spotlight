@@ -25,8 +25,8 @@ function b_spotlight_show_wfsection($options)
 
     $modhandler        = xoops_getHandler('module');
     $xoopsModule       = &$modhandler->getByDirname('spotlight');
-    $config_handler    = xoops_getHandler('config');
-    $xoopsModuleConfig = &$config_handler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
+    $configHandler    = xoops_getHandler('config');
+    $xoopsModuleConfig = &$configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     $fhometext = '';
     $block     = array();

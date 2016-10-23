@@ -14,13 +14,13 @@ $op     = isset($_POST['op']) ? trim($_POST['op']) : $op;
 $xml_id = isset($_GET['xml_id']) ? trim($_GET['xml_id']) : 0;
 $xml_id = isset($_POST['xml_id']) ? trim($_POST['xml_id']) : $xml_id;
 include_once __DIR__ . '/admin_header.php';
-$nt_handler = xoops_getModuleHandler('xml');
+$ntHandler = xoops_getModuleHandler('xml');
 if (!empty($xml_id)) {
-    $nt      = $nt_handler->get($xml_id);
+    $nt      = $ntHandler->get($xml_id);
     $caption = sprintf(_AM_SPOT_XML_EDIT_ITEM, $xml_id);
 }
 if (!isset($nt) || !$nt) {
-    $nt      = $nt_handler->create();
+    $nt      = $ntHandler->create();
     $caption = _AM_SPOT_XML_NEW_ITEM;
 }
 
@@ -28,7 +28,7 @@ switch ($op) {
     default:
         xoops_cp_header();
         //  spot_adminmenu(_AM_SPOT_NAME_XML);
-        if ($ticks =& $nt_handler->getObjects()) {
+        if ($ticks =& $ntHandler->getObjects()) {
             echo '
 <form action="xml.php" method="post">
     <table class="outer" cellspacing="1">
@@ -67,11 +67,11 @@ switch ($op) {
         $nt->setVar('xml_title', trim($xml_title));
         $nt->setVar('xml_text', trim($xml_text));
         $nt->setVar('xml_order', (int)$xml_order);
-        if (!$inserted = $nt_handler->insert($nt)) {
+        if (!$inserted = $ntHandler->insert($nt)) {
             xoops_cp_header();
             echo $nt->getHtmlErrors();
         } else {
-            $nt_handler->genXml();
+            $ntHandler->genXml();
             redirect_header('xml.php', 0, _AM_SPOT_MESSAGE);
         }
         break;
@@ -80,21 +80,21 @@ switch ($op) {
         if (count($del) > 0) {
             $ids      = implode(',', $del);
             $criteria = new Criteria('xml_id', '(' . $ids . ')', 'IN');
-            if ($result = $nt_handler->deleteAll($criteria)) {
+            if ($result = $ntHandler->deleteAll($criteria)) {
                 xoops_cp_header();
                 echo $result;
             }
         }
         foreach ($_POST['order'] as $k => $v) {
             if (!in_array($k, $del)) {
-                $tick =& $nt_handler->get($k);
+                $tick =& $ntHandler->get($k);
                 if (false != $tick) {
                     $tick->setVar('xml_order', $v);
-                    $nt_handler->insert($tick);
+                    $ntHandler->insert($tick);
                 }
             }
         }
-        $nt_handler->genXml();
+        $ntHandler->genXml();
         redirect_header('xml.php', 0, _AM_SPOT_MESSAGE);
         break;
 }

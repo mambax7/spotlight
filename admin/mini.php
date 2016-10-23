@@ -14,7 +14,7 @@ $op  = isset($_POST['op']) ? trim($_POST['op']) : $op;
 $max = 6;
 
 include_once __DIR__ . '/admin_header.php';
-$minis_handler = xoops_getModuleHandler('mini');
+$minisHandler = xoops_getModuleHandler('mini');
 
 switch ($op) {
     default:
@@ -28,8 +28,8 @@ switch ($op) {
         //  spot_adminmenu(_AM_SPOT_NAME_MINI);
         $form = new XoopsThemeForm(_AM_SPOT_NAME_MINI, 'mini', xoops_getenv('PHP_SELF'));
         for ($i = 1; $i < $max; ++$i) {
-            if (!$mini = $minis_handler->get($i)) {
-                $mini = $minis_handler->create();
+            if (!$mini = $minisHandler->get($i)) {
+                $mini = $minisHandler->create();
             }
             ob_start();
             #$news->makeMySelBox("title", "title", $mini->getVar('storyid'), 1, 'story['.$i.']');
@@ -64,15 +64,15 @@ switch ($op) {
         extract($_POST);
         $errors = array();
         for ($i = 1; $i < $max; ++$i) {
-            if (!$mini = $minis_handler->get($i)) {
-                $mini = $minis_handler->create();
+            if (!$mini = $minisHandler->get($i)) {
+                $mini = $minisHandler->create();
             }
             $mini->setVar('mini_show', $show[$i]);
             $mini->setVar('topicid', $topic[$i]);
             $mini->setVar('mini_img', $img[$i]);
             $mini->setVar('mini_text', trim($text[$i]));
             $mini->setVar('mini_align', $align[$i]);
-            if (!$inserted = $minis_handler->insert($mini)) {
+            if (!$inserted = $minisHandler->insert($mini)) {
                 $errors[] = $mini->getHtmlErrors();
             }
         }
