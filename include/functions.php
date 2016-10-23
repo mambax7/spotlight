@@ -107,7 +107,7 @@ function spot_uploading(
 ) {
     include_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
-    global $xoopsConfig, $xoopsModuleConfig, $HTTP_POST_VARS;
+    global $xoopsConfig, $xoopsModuleConfig, $_POST;
 
     $maxfilesize   = $xoopsModuleConfig['maxfilesize'];
     $maxfilewidth  = $xoopsModuleConfig['maximgwidth'];
@@ -116,7 +116,7 @@ function spot_uploading(
 
     $uploader = new XoopsMediaUploader($uploaddir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
 
-    if ($uploader->fetchMedia($HTTP_POST_VARS['xoops_upload_file'][$num])) {
+    if ($uploader->fetchMedia($_POST['xoops_upload_file'][$num])) {
         if (!$uploader->upload()) {
             $errors = $uploader->getErrors();
             redirect_header($redirecturl, 1, $errors);

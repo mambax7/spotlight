@@ -12,31 +12,31 @@ include_once __DIR__ . '/admin_header.php';
 
 $op = '';
 
-if (isset($HTTP_POST_VARS)) {
-    foreach ($HTTP_POST_VARS as $k => $v) {
+if (isset($_POST)) {
+    foreach ($_POST as $k => $v) {
         ${$k} = $v;
     }
 }
 
-if (isset($HTTP_GET_VARS)) {
-    foreach ($HTTP_GET_VARS as $k => $v) {
+if (isset($_GET)) {
+    foreach ($_GET as $k => $v) {
         ${$k} = $v;
     }
 }
 
-$rootpath = isset($HTTP_GET_VARS['rootpath']) ? (int)$HTTP_GET_VARS['rootpath'] : 0;
+$rootpath = isset($_GET['rootpath']) ? (int)$_GET['rootpath'] : 0;
 
 switch ($op) {
     case 'upload':
 
-        global $HTTP_POST_VARS;
+        global $_POST;
 
-        if ($HTTP_POST_FILES['uploadfile']['name'] != '') {
-            if (file_exists(XOOPS_ROOT_PATH . '/' . $HTTP_POST_VARS['uploadpath'] . '/' . $HTTP_POST_FILES['uploadfile']['name'])) {
+        if ($_FILES['uploadfile']['name'] != '') {
+            if (file_exists(XOOPS_ROOT_PATH . '/' . $_POST['uploadpath'] . '/' . $_FILES['uploadfile']['name'])) {
                 redirect_header('upload.php', 1, _AM_SPOT_CHANIMAGEEXIST);
             }
             $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png');
-            spot_uploading($allowed_mimetypes, $HTTP_POST_FILES['uploadfile']['name'], 'upload.php', 0, $HTTP_POST_VARS['uploadpath'], 1);
+            spot_uploading($allowed_mimetypes, $_FILES['uploadfile']['name'], 'upload.php', 0, $_POST['uploadpath'], 1);
         } else {
             redirect_header('upload.php', '2', _AM_SPOT_CHANNOIMAGEEXIST);
         }
@@ -46,7 +46,7 @@ switch ($op) {
     case 'delfile':
 
         if (isset($confirm) && $confirm == 1) {
-            $filetodelete = XOOPS_ROOT_PATH . '/' . $HTTP_POST_VARS['uploadpath'] . '/' . $HTTP_POST_VARS['channelfile'];
+            $filetodelete = XOOPS_ROOT_PATH . '/' . $_POST['uploadpath'] . '/' . $_POST['channelfile'];
             if (file_exists($filetodelete)) {
                 chmod($filetodelete, 0666);
                 if (@unlink($filetodelete)) {
@@ -60,10 +60,10 @@ switch ($op) {
             xoops_cp_header();
             xoops_confirm(array(
                               'op'          => 'delfile',
-                              'uploadpath'  => $HTTP_POST_VARS['uploadpath'],
-                              'channelfile' => $HTTP_POST_VARS['channelfile'],
+                              'uploadpath'  => $_POST['uploadpath'],
+                              'channelfile' => $_POST['channelfile'],
                               'confirm'     => 1
-                          ), 'upload.php', _AM_SPOT_DELETEFILE . '<b><br>' . $HTTP_POST_VARS['channelfile'], 'Delete');
+                          ), 'upload.php', _AM_SPOT_DELETEFILE . '<b><br>' . $_POST['channelfile'], 'Delete');
         }
         break;
 
