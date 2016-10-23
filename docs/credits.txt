@@ -1,0 +1,13 @@
+Credits
+===============
+
+Originally developed by by Spark [ kuht.it ]
+
+"Spotlight" http://linux.kuht.it  - http://www.kuht.it spark@kuht.it
+
+Adaptation for XOOPS 2.0x by Herko (me at herkocoomans dot net) and dAWiLbY (willemsen1 at chello dot nl)
+and Catzwolf (catzwolf@wfsections.xoops2.com)
+
+Features modified by Vinit
+
+Version 2.3 was updated to XOOPS 2.5.0 Standard GUI by Mamba

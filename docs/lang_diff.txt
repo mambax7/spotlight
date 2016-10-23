@@ -1,0 +1,17 @@
+LANGUAGE DIFFERENCES
+=====================
+
+Below are language differences from a version to next version.
+
+Legend :
++ Added
+- Removed
+* Modified
+x renamed
+
+2.3
+
+admin.php
+-------------------
++ _AM_SPOT_NO_NEWS
++ _AM_SPOT_NO_WFSECTION
