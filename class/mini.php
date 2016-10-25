@@ -84,7 +84,7 @@ class SpotlightMiniHandler extends XoopsObjectHandler
      * @param string $query
      * @return bool
      */
-    public function &get($id, $query = '*')
+    public function get($id, $query = '*')
     {
         $id  = (int)$id;
         $ret = false;
