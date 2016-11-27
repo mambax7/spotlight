@@ -10,55 +10,50 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+use Xmf\Module\Admin;
+use Xmf\Module\Helper;
 
-//$path = dirname(dirname(dirname(__DIR__)));
-//include_once $path . '/mainfile.php';
+$pathIcon32 = Admin::menuIconPath('');
+$moduleDirName = basename(dirname(__DIR__));
 
-/** @var XoopsModuleHandler $moduleHandler */
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname(basename(dirname(__DIR__)));
-$pathIcon32    =& $module->getInfo('icons32');
-xoops_loadLanguage('admin', $module->dirname());
-xoops_loadLanguage('modinfo', $module->dirname());
 
-$pathModuleAdmin =& $module->getInfo('dirmoduleadmin');
-$pathLanguage    = dirname(dirname(dirname(__DIR__))) . $pathModuleAdmin;
-if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $pathLanguage . '/language/english/main.php';
-}
-include_once $fileinc;
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png'
+);
 
-$adminmenu              = array();
-$i                      = 0;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_HOME;
-$adminmenu[$i]['link']  = 'admin/index.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
-//++$i;
-//$adminmenu[$i]['title'] = _MI_SPOT_ADMENU1;
-//$adminmenu[$i]['link'] = "admin/main.php";
-//$adminmenu[$i]["icon"]  = $pathIcon32 . '/home.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_SPOT_ADMENU2;
-$adminmenu[$i]['link']  = 'admin/main.php?op=news';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/content.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_SPOT_ADMENU4;
-$adminmenu[$i]['link']  = 'admin/mini.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/highlight.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_SPOT_ADMENU5;
-$adminmenu[$i]['link']  = 'admin/xml.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/album.png';
-++$i;
-$adminmenu[$i]['title'] = _MI_SPOT_ADMENU3;
-$adminmenu[$i]['link']  = 'admin/main.php?op=wfsections';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/view_detailed.png';
-++$i;
-$adminmenu[$i]['title'] = _AM_SPOT_NAME_UPLOAD;
-$adminmenu[$i]['link']  = 'admin/upload.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/photo.png';
-++$i;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
+$adminmenu[] = array(
+    'title' => _MI_SPOT_ADMENU2,
+    'link'  => 'admin/main.php?op=news',
+    'icon'  => $pathIcon32 . '/content.png'
+);
+
+$adminmenu[] = array(
+    'title' => _MI_SPOT_ADMENU4,
+    'link'  => 'admin/mini.php',
+    'icon'  => $pathIcon32 . '/highlight.png'
+);
+$adminmenu[] = array(
+    'title' => _MI_SPOT_ADMENU5,
+    'link'  => 'admin/xml.php',
+    'icon'  => $pathIcon32 . '/album.png'
+);
+$adminmenu[] = array(
+    'title' => _MI_SPOT_ADMENU3,
+    'link'  => 'admin/main.php?op=wfsections',
+    'icon'  => $pathIcon32 . '/view_detailed.png'
+);
+$adminmenu[] = array(
+    'title' => _AM_SPOT_NAME_UPLOAD,
+    'link'  => 'admin/upload.php',
+    'icon'  => $pathIcon32 . '/photo.png'
+);
+$adminmenu[] = array(
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png'
+);
+
+
+

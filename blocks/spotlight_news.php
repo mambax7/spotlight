@@ -24,6 +24,7 @@ function spotlight_show_news($options)
     $block = array();
 
     global $xoopsDB, $xoopsConfig, $myts, $xoopsModuleConfig, $xoopsModule;
+    XoopsLoad::load('XoopsUserUtility');
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -206,7 +207,7 @@ function spotlight_show_news($options)
     if ($xoopsModuleConfig['showtopicbox']) {
         // rb topic select form for news direct topic access
         include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
-        $xt         = new XoopsTopic($xoopsDB->prefix('mod_news_topics'));
+        $xt         = new XoopsTopic($xoopsDB->prefix('news_topics'));
         $jump       = XOOPS_URL . '/modules/news/index.php?storytopic=';
         $storytopic = !empty($storytopic) ? (int)$storytopic : 0;
         ob_start();
@@ -236,12 +237,12 @@ function spotlight_show_news($options)
 }
 
 /**
- * @param $options
+ * @param array $options
  * @return string
  */
 function spotlight_edit_news($options)
 {
-    $form .= _MB_SPOT_ORDER . ' <select name="options[0]">' . "\n";
+    $form = _MB_SPOT_ORDER . ' <select name="options[0]">' . "\n";
     $form .= '<option value="published"';
     if ($options[0] === 'published') {
         $form .= ' selected';

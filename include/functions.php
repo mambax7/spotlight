@@ -15,8 +15,8 @@
  *
  * @param $thishtmlpage
  * @param $thepath
- * @return mixed
- */
+ * @return
+ **/
 function spot_htmlarray($thishtmlpage, $thepath)
 {
     global $xoopsConfig, $wfsConfig;

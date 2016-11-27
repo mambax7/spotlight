@@ -22,8 +22,8 @@ switch ($op) {
         include_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
         include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         #$news = new XoopsTree($xoopsDB->prefix("stories"), "storyid", "0");
-        $news = new SpotlightXoopsTree($xoopsDB->prefix('mod_news_topics'), 'topic_id', '0');
-        $imgs =& XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . '/' . $xoopsModuleConfig['uploaddir']);
+        $news = new SpotlightXoopsTree($xoopsDB->prefix('news_topics'), 'topic_id', '0');
+        $imgs = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . '/' . $xoopsModuleConfig['uploaddir']);
         xoops_cp_header();
         //  spot_adminmenu(_AM_SPOT_NAME_MINI);
         $form = new XoopsThemeForm(_AM_SPOT_NAME_MINI, 'mini', xoops_getenv('PHP_SELF'));

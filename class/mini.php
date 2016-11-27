@@ -84,7 +84,7 @@ class SpotlightMiniHandler extends XoopsObjectHandler
      * @param string $query
      * @return bool
      */
-    public function get($id, $query = '*')
+    public function &get($id, $query = '*')
     {
         $id  = (int)$id;
         $ret = false;
@@ -157,8 +157,9 @@ class SpotlightMiniHandler extends XoopsObjectHandler
             }
             unset($obj);
         }
+        $temp = count($ret) > 0 ? $ret : false;
 
-        return count($ret) > 0 ? $ret : false;
+        return $temp;
     }
 
     /**

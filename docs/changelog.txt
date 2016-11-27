@@ -1,6 +1,9 @@
-2.3 RC 1           2016-10-23
+2.3 RC 1           2016-11-27
 =================================
 - added _AM_SPOT_NO_NEWS and _AM_SPOT_NO_WFSECTION to /english/admin.php
+- updated table names for News (mamba)
+- code cosmetics  (mamba)
+- started with XMF conversion (mamba)
 
 
 2.3 Beta 2       2014-04-23

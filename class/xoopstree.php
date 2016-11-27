@@ -319,7 +319,7 @@ class SpotlightXoopsTree
      * @param string|unknown_type $order
      * @param array|unknown_type  $parray
      * @param string|unknown_type $r_prefix
-     * @return unknown
+     * @return mixed
      */
     public function getChildTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
     {

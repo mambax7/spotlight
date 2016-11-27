@@ -17,10 +17,13 @@
  * @author       XOOPS Development Team
  */
 
-$path = dirname(dirname(dirname(__DIR__)));
-include_once $path . '/mainfile.php';
-include_once $path . '/include/cp_functions.php';
-require_once $path . '/include/cp_header.php';
+use Xmf\Language;
+use Xmf\Module\Admin;
+
+$moduleDirName = basename(dirname(__DIR__));
+include_once __DIR__ . '/../../../mainfile.php';
+include_once $GLOBALS['xoops']->path('www/include/cp_functions.php');
+include_once $GLOBALS['xoops']->path('www/include/cp_header.php');
 
 include_once XOOPS_ROOT_PATH . '/kernel/module.php';
 include_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
@@ -36,18 +39,17 @@ $moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
 //require_once __DIR__ . '/../include/functions.php';
 
 // Load language files
-xoops_loadLanguage('admin', $moduleDirName);
-xoops_loadLanguage('modinfo', $moduleDirName);
-xoops_loadLanguage('main', $moduleDirName);
+Language::load('admin', $moduleDirName);
+Language::load('modinfo', $moduleDirName);
+Language::load('main', $moduleDirName);
 
-$pathIcon16      = '../' . $xoopsModule->getInfo('icons16');
-$pathIcon32      = '../' . $xoopsModule->getInfo('icons32');
-$pathModuleAdmin =& $xoopsModule->getInfo('dirmoduleadmin');
-
-include_once $GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php');
+$pathIcon16      = Admin::iconUrl('', 16);
+$pathIcon32      = Admin::iconUrl('', 32);
 
 $myts = MyTextSanitizer::getInstance();
 
 // Image defines from here
-$editimg   = '<img src=' . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/assets/images/icon/edit.gif ALT=' . _AM_SPOT_EDIT . '>';
-$deleteimg = '<img src=' . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/assets/images/icon/delete.gif ALT=' . _AM_SPOT_DELETE . '>';
+$editimg   = '<img src=' . $pathIcon16 . '/edit.png ALT ALT=' . _AM_SPOT_EDIT . '>';
+$deleteimg = '<img src=' . $pathIcon16 . '/delete.png  ALT=' . _AM_SPOT_DELETE . '>';
+
+$adminObject = Admin::getInstance();

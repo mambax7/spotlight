@@ -29,7 +29,7 @@
 //---------------------------------------------------------------------------//
 $modversion['version']       = 2.3;
 $modversion['module_status'] = 'RC 1';
-$modversion['release_date']  = '2016/10/23';
+$modversion['release_date']  = '2016/11/26';
 $modversion['name']          = _MI_SPOT_NAME;
 $modversion['description']   = _MI_SPOT_DESC;
 $modversion['author']        = 'Spark [http://linux.kuht.it]';
