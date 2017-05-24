@@ -28,7 +28,7 @@ switch ($op) {
     default:
         xoops_cp_header();
         //  spot_adminmenu(_AM_SPOT_NAME_XML);
-        if ($ticks =& $ntHandler->getObjects()) {
+        if ($ticks = $ntHandler->getObjects()) {
             echo '
 <form action="xml.php" method="post">
     <table class="outer" cellspacing="1">

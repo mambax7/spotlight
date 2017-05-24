@@ -264,7 +264,7 @@ class SpotlightXmlHandler extends XoopsObjectHandler
      */
     public function genXml()
     {
-        if ($ticks =& $this->getObjects()) {
+        if ($ticks = $this->getObjects()) {
             $xml  = '';
             $tmpl = "<news>\n\t<header>\n\t\t%s\n\t</header>\n\t<body>\n\t\t%s\n\t</body>\n\t<link>\n\t\t%s\n\t</link>\n</news>\n";
             foreach ($ticks as $t) {

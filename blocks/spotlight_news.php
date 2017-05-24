@@ -37,7 +37,7 @@ function spotlight_show_news($options)
      * Mini Spotlights
      */
     $minisHandler = xoops_getModuleHandler('mini', 'spotlight');
-    if ($minis =& $minisHandler->getObjects()) {
+    if ($minis = $minisHandler->getObjects()) {
         $block['mini'] = array();
         $excludes      = array();
         foreach ($minis as $m) {
