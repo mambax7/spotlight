@@ -7,7 +7,7 @@
 * http://www.gnu.org/copyleft/gpl.html
 *
 * XOOPS - PHP Content Management System
-* Copyright (c) 2000-2016 XOOPS.org <http://xoops.org/>
+* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org/>
 */
 $op  = isset($_GET['op']) ? trim($_GET['op']) : '';
 $op  = isset($_POST['op']) ? trim($_POST['op']) : $op;
