@@ -34,7 +34,7 @@
                             <span style="float:center; background-color: transparent;">
                                 <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>">
                                 <img src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>" alt="<{$block.newstitle}>"
-                                     width="<{$block.imgwidth}>" height="<{$block.imgheight}>"/>
+                                     width="<{$block.imgwidth}>" height="<{$block.imgheight}>">
                                 </a>
                             </span>
                                             </div>
@@ -72,7 +72,7 @@
                                         <td>
                                             <{if $m.img != ""}>
                                                 <img src="<{$xoops_url}>/<{$block.imgpath}>/<{$m.img}>" alt=""
-                                                     style="margin: 4px;" align="<{$m.align}>"/>
+                                                     style="margin: 4px;" align="<{$m.align}>">
                                             <{/if}>
                                             <{$m.text}>
                                         </td>
@@ -190,7 +190,7 @@
                                     <a href="<{$xoops_url}>/modules/news/article.php?storyid=<{$block.storyid}>"><img
                                                 src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>"
                                                 alt="<{$block.newstitle}>" width="<{$block.imgwidth}>"
-                                                height="<{$block.imgheight}>"/></a>
+                                                height="<{$block.imgheight}>"></a>
                                 </div>
                             <{/if}>
                         </td>

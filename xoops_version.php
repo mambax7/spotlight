@@ -1,21 +1,22 @@
 <?php
-// ------------------------------------------------------------------------- //
-//                XOOPS - PHP Content Management System                      //
-//                       <https://xoops.org/>                             //
-// ------------------------------------------------------------------------- //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright      {@link https://xoops.org/ XOOPS Project}
+ * @license        {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @package
+ * @since
+ * @author         XOOPS Development Team
+ */
+
 // ------------------------------------------------------------------------- //
 //                                                                           //
 //                               "Spotlight"                                 //
@@ -40,17 +41,18 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 $modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
 $modversion['image']         = 'assets/images/logoModule.png';
 $modversion['dirname']       = basename(__DIR__);
-
-$modversion['dirmoduleadmin']      = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16']             = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32']             = '../../Frameworks/moduleclasses/icons/32';
+//$modversion['dirmoduleadmin']      = '/Frameworks/moduleclasses/moduleadmin';
+//$modversion['icons16']             = '../../Frameworks/moduleclasses/icons/16';
+//$modversion['icons32']             = '../../Frameworks/moduleclasses/icons/32';
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
+$modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.1');
+$modversion['min_db']              = array('mysql' => '5.5');
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -253,13 +255,13 @@ $modversion['config'][21]['default']     = 1;
 //wfsection block config
 // group header
 $modversion['config'][] = array(
-    'name'        => 'extrasystems_configs',
-    'title'       => '_MI_SPOT_CONFIG_WF',
-//    'description' => '_MI_SPOT_CONFIG_WF_DSC',
-    'formtype'    => 'line_break',
-    'valuetype'   => 'textbox',
-    'default'     => 'odd',
-    'category'    => 'group_header'
+    'name'      => 'extrasystems_configs',
+    'title'     => '_MI_SPOT_CONFIG_WF',
+    //    'description' => '_MI_SPOT_CONFIG_WF_DSC',
+    'formtype'  => 'line_break',
+    'valuetype' => 'textbox',
+    'default'   => 'odd',
+    'category'  => 'group_header'
 );
 
 $modversion['config'][22]['name']        = 'wfssthumbs';

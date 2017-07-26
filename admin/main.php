@@ -10,10 +10,10 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/admin_header.php';
-include_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
-include_once XOOPS_ROOT_PATH . '/kernel/user.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . basename(dirname(__DIR__)) . '/class/xoopstree.php';
+require_once __DIR__ . '/admin_header.php';
+require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
+require_once XOOPS_ROOT_PATH . '/kernel/user.php';
+require_once XOOPS_ROOT_PATH . '/modules/' . basename(dirname(__DIR__)) . '/class/xoopstree.php';
 
 $op = '';
 
@@ -50,10 +50,10 @@ function spotlightNewsForm()
     $sql = $xoopsDB->query('SELECT sid, item, auto, image, auto_image, imagealign FROM ' . $xoopsDB->prefix('spotlight') . ' WHERE sid=1');
     list($sid, $item, $auto, $indeximage, $auto_image, $imagealign) = $xoopsDB->fetchRow($sql);
 
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $sform  = new XoopsThemeForm(_AM_SPOT_SELECT_NEWS, 'op', xoops_getenv('PHP_SELF'));
-    $mytree = new SpotlightXoopsTree($xoopsDB->prefix('mod_news_stories'), 'storyid', '0');
+    $sform  = new XoopsThemeForm(_AM_SPOT_SELECT_NEWS, 'op', xoops_getenv('PHP_SELF'), 'post', true);
+    $mytree = new SpotlightXoopsTree($xoopsDB->prefix('news_stories'), 'storyid', '0');
     ob_start();
     $sform->addElement(new XoopsFormHidden('storyid', $item));
     $mytree->makeMySelBox('title', 'title', $item, 1);
@@ -84,7 +84,7 @@ function spotlightNewsForm()
     $indeximage_select->setExtra("onchange='showImgSelected(\"image1\", \"indeximage\", \"" . $xoopsModuleConfig['uploaddir'] . "\", \"\", \"" . XOOPS_URL . "\")'");
     $indeximage_tray = new XoopsFormElementTray(_AM_SPOT_SELECT_IMG, '&nbsp;');
     $indeximage_tray->addElement($indeximage_select);
-    $indeximage_tray->addElement(new XoopsFormLabel('', "<p><img src='" . XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/' . $indeximage . "' name='image1' id='image1' alt='' height ='200' width ='200'/></p>" . _AM_SPOT_NOTERESIZE . ''));
+    $indeximage_tray->addElement(new XoopsFormLabel('', "<p><img src='" . XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/' . $indeximage . "' name='image1' id='image1' alt='' height ='200' width ='200'></p>" . _AM_SPOT_NOTERESIZE . ''));
     $sform->addElement($indeximage_tray);
 
     $autoimage_select = new XoopsFormRadioYN(_AM_SPOT_SELECT_NEWS_AUTO_IMG, 'auto_image', $auto_image, ' ' . _YES . '', ' ' . _NO . '');
@@ -140,9 +140,9 @@ function spotlightWFSectionForm()
     $result3 = $xoopsDB->query($sql3, 0, 1);
     list($item, $auto, $indeximage, $auto_image, $imagealign) = $xoopsDB->fetchRow($result3);
 
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-    $sform = new XoopsThemeForm(_AM_SPOT_SELECT_WFS, 'op', xoops_getenv('PHP_SELF'));
+    $sform = new XoopsThemeForm(_AM_SPOT_SELECT_WFS, 'op', xoops_getenv('PHP_SELF'), 'post', true);
     $sform->setExtra('enctype="multipart/form-data"');
     $mytree = new SpotlightXoopsTree($xoopsDB->prefix('wfs_article'), 'articleid', '0');
 
@@ -176,8 +176,7 @@ function spotlightWFSectionForm()
     // $indeximage_select -> setExtra("onchange='displaydetails($indeximage)';)");
     $indeximage_tray = new XoopsFormElementTray(_AM_SPOT_SELECT_IMG_WFS, '&nbsp;');
     $indeximage_tray->addElement($indeximage_select);
-    $indeximage_tray->addElement(new XoopsFormLabel('',
-                                                    "<p><img src='" . XOOPS_URL . '/' . $xoopsModuleConfig['wfuploaddir'] . '/' . $indeximage . "' name='image1' id='image1' alt='' height='200' width='200' border = '1'/></p>Image has been resized"));
+    $indeximage_tray->addElement(new XoopsFormLabel('', "<p><img src='" . XOOPS_URL . '/' . $xoopsModuleConfig['wfuploaddir'] . '/' . $indeximage . "' name='image1' id='image1' alt='' height='200' width='200' border = '1'></p>Image has been resized"));
     $sform->addElement($indeximage_tray);
 
     $autoimage_select = new XoopsFormRadioYN(_AM_SPOT_SELECT_WFS_AUTO_IMG, 'auto_image', $auto_image, ' ' . _YES . '', ' ' . _NO . '');
@@ -211,8 +210,7 @@ function spotlightWFSectionForm()
     echo "<td class='bg3' align='center'><b>" . _AM_SPOT_ACTION . '</b></td>';
     echo '</tr>';
 
-    $sql    = ('SELECT articleid, title, categoryid, uid, changed, weight, published FROM ' . $xoopsDB->prefix('wfs_article') . ' WHERE changed < ' . time() . ' AND published > 0 AND (expired = 0 OR expired > ' . time()
-               . ') ORDER BY articleid DESC;');
+    $sql    = ('SELECT articleid, title, categoryid, uid, changed, weight, published FROM ' . $xoopsDB->prefix('wfs_article') . ' WHERE changed < ' . time() . ' AND published > 0 AND (expired = 0 OR expired > ' . time() . ') ORDER BY articleid DESC;');
     $result = $xoopsDB->query($sql, 0, 10);
     if (!$result) {
         echo '<tr ><td align="center" colspan ="8" class="head"><b>' . _AM_SPOT_NOTFOUND . '</b></td></tr>';

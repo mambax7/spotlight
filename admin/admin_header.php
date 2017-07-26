@@ -20,31 +20,31 @@
 use Xmf\Language;
 use Xmf\Module\Admin;
 
-$moduleDirName = basename(dirname(__DIR__));
-include_once __DIR__ . '/../../../mainfile.php';
-include_once $GLOBALS['xoops']->path('www/include/cp_functions.php');
-include_once $GLOBALS['xoops']->path('www/include/cp_header.php');
+require_once __DIR__ . '/../../../include/cp_header.php';
+require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
-include_once XOOPS_ROOT_PATH . '/kernel/module.php';
-include_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
+//require_once __DIR__ . '/../class/utility.php';
+//require_once __DIR__ . '/../include/common.php';
+
+$moduleDirName = basename(dirname(__DIR__));
+
+require_once XOOPS_ROOT_PATH . '/kernel/module.php';
+require_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
 include XOOPS_ROOT_PATH . '/class/xoopstree.php';
 include XOOPS_ROOT_PATH . '/class/xoopslists.php';
-include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 global $xoopsModule;
-
-$moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
 
 //if functions.php file exist
 //require_once __DIR__ . '/../include/functions.php';
 
 // Load language files
-Language::load('admin', $moduleDirName);
-Language::load('modinfo', $moduleDirName);
-Language::load('main', $moduleDirName);
+xoops_loadLanguage('admin', $moduleDirName);
+xoops_loadLanguage('modinfo', $moduleDirName);
+xoops_loadLanguage('main', $moduleDirName);
 
-$pathIcon16      = Admin::iconUrl('', 16);
-$pathIcon32      = Admin::iconUrl('', 32);
+$pathIcon16 = Admin::iconUrl('', 16);
+$pathIcon32 = Admin::iconUrl('', 32);
 
 $myts = MyTextSanitizer::getInstance();
 
@@ -52,4 +52,4 @@ $myts = MyTextSanitizer::getInstance();
 $editimg   = '<img src=' . $pathIcon16 . '/edit.png ALT ALT=' . _AM_SPOT_EDIT . '>';
 $deleteimg = '<img src=' . $pathIcon16 . '/delete.png  ALT=' . _AM_SPOT_DELETE . '>';
 
-$adminObject = Admin::getInstance();
+$adminObject = \Xmf\Module\Admin::getInstance();

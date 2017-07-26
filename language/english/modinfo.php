@@ -26,6 +26,7 @@ define('_MI_SPOT_ADMENU2', 'News Block');
 define('_MI_SPOT_ADMENU3', 'WF-Section Block');
 define('_MI_SPOT_ADMENU4', 'Mini Spotlights');
 define('_MI_SPOT_ADMENU5', 'News Ticker');
+define('_AM_SPOT_NAME_UPLOAD', 'Upload Image');
 
 define('_MI_SPOT_UPLOADDIR', 'News Image Upload Directory (No trailing slash)');
 define('_MI_SPOT_WFUPLOADDIR', 'WF-Section Image Upload Directory (No trailing slash)');

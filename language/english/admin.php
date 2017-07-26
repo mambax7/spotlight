@@ -24,11 +24,11 @@ define('_AM_SPOT_XML_TEXT', 'Spotlight Text');
 define('_AM_SPOT_XML_ID', 'N°');
 define('_AM_SPOT_XML_ORDER', 'Display Order');
 define('_AM_SPOT_XML_MANAGE', 'Delete/Re-order');
+define('_AM_SPOT_NAME_UPLOAD', 'Upload Image');
 
 define('_AM_SPOT_NAME_CONF', 'Spotlight Configuration');
 define('_AM_SPOT_NAME_NEWS', 'News Block Configuration');
 define('_AM_SPOT_NAME_WFSS', 'WF-Section Block Configuration');
-define('_AM_SPOT_NAME_UPLOAD', 'Upload Image');
 
 define('_AM_SPOT_NAME_NEWSBLOCK', 'News Block Config');
 define('_AM_SPOT_NAME_WFSSBLOCK', 'WF-Section Block Config');

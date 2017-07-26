@@ -33,7 +33,7 @@
                 <span style="float:center; background-color: transparent;">
                     <a href="<{$xoops_url}>/modules/wfsection/article.php?articleid=<{$block.articleid}>">
                         <img src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>" alt="<{$block.articletitle}>"
-                             width="<{$block.imgwidth}>" height="<{$block.imgheight}>"/>
+                             width="<{$block.imgwidth}>" height="<{$block.imgheight}>">
                     </a>
                 </span>
                         </div>
@@ -126,7 +126,7 @@
                                         <a href="<{$xoops_url}>/modules/wfsection/article.php?articleid=<{$block.articleid}>">
                                             <img src="<{$xoops_url}>/<{$block.imgpath}>/<{$block.image}>"
                                                  alt="<{$block.articletitle}>" width="<{$block.imgwidth}>"
-                                                 height="<{$block.imgheight}>"/>
+                                                 height="<{$block.imgheight}>">
                                         </a></div>
                                 <{/if}>
                             </td>

@@ -1,19 +1,19 @@
 <?php
 /*
 * Mini Spotlights
-* Presented by Brandycoke Productions  <http://www.brandycoke.com/>
+* Presented by Brandycoke Productions  <http://www.brandycoke.com>
 * Programmed exclusively for GuitarGearHeads <http://www.guitargearheads.com>
 * Licensed under the terms of GNU General Public License
 * http://www.gnu.org/copyleft/gpl.html
 *
 * XOOPS - PHP Content Management System
-* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org/>
+* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org>
 */
 $op     = isset($_GET['op']) ? trim($_GET['op']) : '';
 $op     = isset($_POST['op']) ? trim($_POST['op']) : $op;
 $xml_id = isset($_GET['xml_id']) ? trim($_GET['xml_id']) : 0;
 $xml_id = isset($_POST['xml_id']) ? trim($_POST['xml_id']) : $xml_id;
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 $ntHandler = xoops_getModuleHandler('xml');
 if (!empty($xml_id)) {
     $nt      = $ntHandler->get($xml_id);
@@ -40,13 +40,39 @@ switch ($op) {
 ';
             foreach ($ticks as $t) {
                 $id = $t->getVar('xml_id');
-                echo '<tr>' . '<td align="center">' . $id . '</td>' . '<td align="left">' . '<a href="xml.php?op=edit&amp;xml_id=' . $t->getVar('xml_id') . '">' . $t->getVar('xml_title') . '</a><br>' . str_replace('{X_SITEURL}', XOOPS_URL . '/',
-                                                                                                                                                                                                                      $t->getVar('xml_url')) . '</td>'
-                     . '<td align="center">' . '<input type="text" id="order' . $id . '" name="order[' . $id . ']" value="' . $t->getVar('xml_order') . '" size="3" maxlength="2" />' . '</td>' . '<td align="center">' . '<input type="checkbox" id="del'
-                     . $id . '" name="del[]" value="' . $id . '" /> ' . _DELETE . '</td>' . "</tr>\n";
+                echo '<tr>'
+                     . '<td align="center">'
+                     . $id
+                     . '</td>'
+                     . '<td align="left">'
+                     . '<a href="xml.php?op=edit&amp;xml_id='
+                     . $t->getVar('xml_id')
+                     . '">'
+                     . $t->getVar('xml_title')
+                     . '</a><br>'
+                     . str_replace('{X_SITEURL}', XOOPS_URL . '/', $t->getVar('xml_url'))
+                     . '</td>'
+                     . '<td align="center">'
+                     . '<input type="text" id="order'
+                     . $id
+                     . '" name="order['
+                     . $id
+                     . ']" value="'
+                     . $t->getVar('xml_order')
+                     . '" size="3" maxlength="2">'
+                     . '</td>'
+                     . '<td align="center">'
+                     . '<input type="checkbox" id="del'
+                     . $id
+                     . '" name="del[]" value="'
+                     . $id
+                     . '"> '
+                     . _DELETE
+                     . '</td>'
+                     . "</tr>\n";
             }
-            echo '<tr><td class="foot" colspan="4" align="right">' . '<input type="submit" id="submit" name="submit" value="' . _AM_SPOT_XML_MANAGE . '" /></td>
-            <input type="hidden" name="op" value="manage" />
+            echo '<tr><td class="foot" colspan="4" align="right">' . '<input type="submit" id="submit" name="submit" value="' . _AM_SPOT_XML_MANAGE . '"></td>
+            <input type="hidden" name="op" value="manage">
             </tr>
     </table>
 </form>';

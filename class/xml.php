@@ -2,13 +2,13 @@
 
 /*
 * Mini Spotlights
-* Presented by Brandycoke Productions  <http://www.brandycoke.com/>
+* Presented by Brandycoke Productions  <http://www.brandycoke.com>
 * Programmed exclusively for GuitarGearHeads <http://www.guitargearheads.com>
 * Licensed under the terms of GNU General Public License
 * http://www.gnu.org/copyleft/gpl.html
 *
 * XOOPS - PHP Content Management System
-* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org/>
+* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org>
 */
 
 /**
@@ -36,7 +36,7 @@ class SpotlightXml extends XoopsObject
      */
     public function editForm($caption)
     {
-        $form  = new XoopsThemeForm($caption, 'xml', xoops_getenv('PHP_SELF'));
+        $form  = new XoopsThemeForm($caption, 'xml', xoops_getenv('PHP_SELF'), 'post', true);
         $t_url = new XoopsFormText(_AM_SPOT_XML_URL, 'xml_url', 50, 255, $this->getVar('xml_url', 'e'));
         $t_url->setDescription(_AM_SPOT_XML_URL_DESC);
 

@@ -8,7 +8,7 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 
 $op = '';
 
@@ -70,7 +70,7 @@ switch ($op) {
     case 'default':
     default:
 
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
         xoops_cp_header();
 
@@ -80,13 +80,13 @@ switch ($op) {
         $namearray    = array(0 => 'Choose Upload Type', 1 => _AM_SPOT_NEWSIMAGES, 2 => _AM_SPOT_WFSECTIONIMAGES);
         $listarray    = array(0 => '', 1 => _AM_SPOT_UPLOADCHANLOGO, 2 => _AM_SPOT_UPLOADLINKIMAGE);
         $displayimage = '';
-//        $safemode     = ini_get('safe_mode') ? _AM_SPOT_ON . _AM_SPOT_SAFEMODEPROBLEMS : _AM_SPOT_OFF;
-        $downloads    = ini_get('enable_dl') ? _AM_SPOT_ON : _AM_SPOT_OFF;
+        //        $safemode     = ini_get('safe_mode') ? _AM_SPOT_ON . _AM_SPOT_SAFEMODEPROBLEMS : _AM_SPOT_OFF;
+        $downloads = ini_get('enable_dl') ? _AM_SPOT_ON : _AM_SPOT_OFF;
 
         //        spot_adminmenu(_AM_SPOT_NAME_CONF, '');
         echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_SPOT_SERVERSTATUS . '</legend>';
         echo "<div style='padding: 8px;'>";
-//        echo '<b>' . _AM_SPOT_SAFEMODE . '</b> ' . $safemode . '<br>';
+        //        echo '<b>' . _AM_SPOT_SAFEMODE . '</b> ' . $safemode . '<br>';
         echo '<b>' . _AM_SPOT_UPLOADS . '</b> ' . $downloads . '<br>';
         if (ini_get('enable_dl')) {
             echo '<b>' . _AM_SPOT_ANDTHEMAX . '</b> ' . ini_get('upload_max_filesize') . '<br>';
@@ -98,7 +98,7 @@ switch ($op) {
             echo "<div style='padding: 16px 0 0 8px;'><b>" . _AM_SPOT_UPLOADPATH . '</b> ' . XOOPS_ROOT_PATH . '/' . $dirarray[$rootpath] . '</div>';
         }
 
-        $iform = new XoopsThemeForm(_AM_SPOT_UPLOADIMAGE . $listarray[$rootpath], 'op', xoops_getenv('PHP_SELF'));
+        $iform = new XoopsThemeForm(_AM_SPOT_UPLOADIMAGE . $listarray[$rootpath], 'op', xoops_getenv('PHP_SELF'), 'post', true);
         $iform->setExtra('enctype="multipart/form-data"');
 
         ob_start();
@@ -119,7 +119,7 @@ switch ($op) {
 
             $smallimage_tray = new XoopsFormElementTray(_AM_SPOT_BUTTON, '&nbsp;');
             $smallimage_tray->addElement($smallimage_select);
-            $smallimage_tray->addElement(new XoopsFormLabel('', "<br><br><img src='" . XOOPS_URL . '/' . $dirarray[$rootpath] . '/' . $channelfile . "' name='image' id='image' alt='' />"));
+            $smallimage_tray->addElement(new XoopsFormLabel('', "<br><br><img src='" . XOOPS_URL . '/' . $dirarray[$rootpath] . '/' . $channelfile . "' name='image' id='image' alt=''>"));
             $iform->addElement($smallimage_tray);
 
             $iform->addElement(new XoopsFormFile(_AM_SPOT_UPLOADLINKIMAGE, 'uploadfile', $xoopsModuleConfig['maxfilesize']));

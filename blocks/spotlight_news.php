@@ -10,8 +10,8 @@
  * Licence: GNU
  */
 
-include_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
-include_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
+require_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
 
 /**
  * spotlight_show_news()
@@ -28,9 +28,9 @@ function spotlight_show_news($options)
 
     $myts = MyTextSanitizer::getInstance();
 
-    $modhandler        = xoops_getHandler('module');
-    $xoopsModule       = $modhandler->getByDirname('spotlight');
-    $configHandler    = xoops_getHandler('config');
+    $moduleHandler     = xoops_getHandler('module');
+    $xoopsModule       = $moduleHandler->getByDirname('spotlight');
+    $configHandler     = xoops_getHandler('config');
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     /**
@@ -43,15 +43,13 @@ function spotlight_show_news($options)
         foreach ($minis as $m) {
             if ($m->getVar('published') > 0 && $m->getVar('published') < time()
                 && ($m->getVar('expired') > time()
-                    || $m->getVar('expired') == 0)
-            ) {
+                    || $m->getVar('expired') == 0)) {
                 $topicid = $m->getVar('topicid');
 
                 /**
                  * Getting the latest  topic under which the post is made.
                  */
-                $current_news_topic = $xoopsDB->query('SELECT topicid, title FROM ' . $xoopsDB->prefix('mod_news_stories') . ' WHERE published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC',
-                                                      1, 0);
+                $current_news_topic = $xoopsDB->query('SELECT topicid, title FROM ' . $xoopsDB->prefix('news_stories') . ' WHERE published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC', 1, 0);
                 list($latest_topicid) = $xoopsDB->fetchRow($current_news_topic);
 
                 if ($latest_topicid != $topicid) {
@@ -59,8 +57,7 @@ function spotlight_show_news($options)
                     /**
                      * Getting the latest news under each topic that is selected as to be shown.
                      */
-                    $mini_news = $xoopsDB->query('SELECT storyid  FROM ' . $xoopsDB->prefix('mod_news_stories') . ' WHERE topicid = ' . $topicid . ' AND published > 0 AND published < ' . time() . ' AND (expired > ' . time()
-                                                 . ' OR expired = 0) ORDER BY published DESC', 1, 0);
+                    $mini_news = $xoopsDB->query('SELECT storyid  FROM ' . $xoopsDB->prefix('news_stories') . ' WHERE topicid = ' . $topicid . ' AND published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC', 1, 0);
                     list($mini_news_id) = $xoopsDB->fetchRow($mini_news);
 
                     if (isset($mini_news_id) and $mini_news_id > 0) {
@@ -98,6 +95,7 @@ function spotlight_show_news($options)
     $block['lang_read']     = _MB_SPOT_READ;
     $block['lang_comments'] = _MB_SPOT_COMMENTS;
     $block['lang_write']    = _MB_SPOT_WRITE;
+    xoops_load('XoopsTopic');
 
     /**
      * Main spotlight database information
@@ -113,7 +111,7 @@ function spotlight_show_news($options)
 
     if (isset($spot_arr['auto']) && $spot_arr['auto'] == 1) {
         // selects the last addition to news
-        $result2 = $xoopsDB->query('SELECT storyid, title FROM ' . $xoopsDB->prefix('mod_news_stories') . ' WHERE published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC', 1, 0);
+        $result2 = $xoopsDB->query('SELECT storyid, title FROM ' . $xoopsDB->prefix('news_stories') . ' WHERE published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC', 1, 0);
         list($fsid, $ftitle) = $xoopsDB->fetchRow($result2);
 
         if (isset($fsid) and $fsid > 0) {
@@ -146,8 +144,7 @@ function spotlight_show_news($options)
             }
 
             if ($xoopsModuleConfig['newsthumbs']) {
-                $block['image'] = spot_createthumb($block['image'], XOOPS_ROOT_PATH, '/' . $block['imgpath'] . '/', 'thumbs/', $xoopsModuleConfig['dmaximgwidth'], $xoopsModuleConfig['dmaximgheight'], $xoopsModuleConfig['imagequality'],
-                                                   $xoopsModuleConfig['updatethumbs']);
+                $block['image'] = spot_createthumb($block['image'], XOOPS_ROOT_PATH, '/' . $block['imgpath'] . '/', 'thumbs/', $xoopsModuleConfig['dmaximgwidth'], $xoopsModuleConfig['dmaximgheight'], $xoopsModuleConfig['imagequality'], $xoopsModuleConfig['updatethumbs']);
                 $block['image'] = 'thumbs/' . basename($block['image']);
             }
         }
@@ -206,7 +203,7 @@ function spotlight_show_news($options)
 
     if ($xoopsModuleConfig['showtopicbox']) {
         // rb topic select form for news direct topic access
-        include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
         $xt         = new XoopsTopic($xoopsDB->prefix('news_topics'));
         $jump       = XOOPS_URL . '/modules/news/index.php?storytopic=';
         $storytopic = !empty($storytopic) ? (int)$storytopic : 0;
@@ -219,9 +216,9 @@ function spotlight_show_news($options)
     if ($xoopsModuleConfig['ministats']) {
         $block['lang_ministats'] = '<span style="text-transform: uppercase;">' . _MB_SPOT_MINISTATS . ':</span>';
 
-        $result = $xoopsDB->query('select sum(counter) FROM ' . $xoopsDB->prefix('mod_news_stories') . '');
+        $result = $xoopsDB->query('SELECT sum(counter) FROM ' . $xoopsDB->prefix('news_stories') . '');
         list($storiesviews) = $xoopsDB->fetchRow($result);
-        $result = $xoopsDB->query('SELECT sum(comments) FROM ' . $xoopsDB->prefix('mod_news_stories') . '');
+        $result = $xoopsDB->query('SELECT sum(comments) FROM ' . $xoopsDB->prefix('news_stories') . '');
         list($comment) = $xoopsDB->fetchRow($result);
 
         $block['ministats'] = _MB_SPOT_PUBLISHED . ': <b>' . NewsStory::countPublishedByTopic() . ' :</b> ' . "\n";

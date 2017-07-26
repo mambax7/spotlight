@@ -2,13 +2,13 @@
 
 /*
 * Mini Spotlights
-* Presented by Brandycoke Productions  <http://www.brandycoke.com/>
+* Presented by Brandycoke Productions  <http://www.brandycoke.com>
 * Programmed exclusively for GuitarGearHeads <http://www.guitargearheads.com>
 * Licensed under the terms of GNU General Public License
 * http://www.gnu.org/copyleft/gpl.html
 *
 * XOOPS - PHP Content Management System
-* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org/>
+* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org>
 */
 
 /**
@@ -140,8 +140,8 @@ class SpotlightMiniHandler extends XoopsObjectHandler
         }
         $criteria->add(new Criteria('m.topicid', 0, '>'));
         $criteria->add(new Criteria('m.topicid', 'n.`topicid`'));
-        $sql .= ' ' . $criteria->renderWhere();
-        $sql .= ' ORDER BY m.mini_id ASC';
+        $sql    .= ' ' . $criteria->renderWhere();
+        $sql    .= ' ORDER BY m.mini_id ASC';
         $result = $this->db->query($sql);
         if (!$result) {
             return false;

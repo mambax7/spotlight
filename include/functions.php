@@ -15,8 +15,8 @@
  *
  * @param $thishtmlpage
  * @param $thepath
- * @return
- **/
+ * @return mixed
+ */
 function spot_htmlarray($thishtmlpage, $thepath)
 {
     global $xoopsConfig, $wfsConfig;
@@ -105,7 +105,7 @@ function spot_uploading(
     $dir = 'uploads',
     $redirect = 0
 ) {
-    include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+    require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
     global $xoopsConfig, $xoopsModuleConfig, $_POST;
 
@@ -138,7 +138,7 @@ function spot_uploading(
  * @param  string      $extra  optional : You can gice the menu a nice footer
  * @param array|string $menu   required : This is an array of links. U can
  * @param  int         $scount required : This will difine the amount of cells long the menu will have.
- * NB: using a value of 3 at the moment will break the menu where the cell colours will be off display.
+ *                             NB: using a value of 3 at the moment will break the menu where the cell colours will be off display.
  * @return THIS ONE WORKS CORRECTLY
  */
 function spot_adminmenu($header = '', $extra = '', $menu = '', $scount = 4)
@@ -493,8 +493,7 @@ function spot_summarize($string, $limit = 10)
         $text .= " $tok";
         if (($words >= $limit)
             && ((substr($tok, -1) === '!') || (substr($tok, -1) === '.')
-                || (substr($tok, -1) === ' '))
-        ) {
+                || (substr($tok, -1) === ' '))) {
             return trim($text);
             unset($text);
         }

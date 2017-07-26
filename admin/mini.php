@@ -1,32 +1,32 @@
 <?php
 /*
 * Mini Spotlights
-* Presented by Brandycoke Productions  <http://www.brandycoke.com/>
+* Presented by Brandycoke Productions  <http://www.brandycoke.com>
 * Programmed exclusively for GuitarGearHeads <http://www.guitargearheads.com>
 * Licensed under the terms of GNU General Public License
 * http://www.gnu.org/copyleft/gpl.html
 *
 * XOOPS - PHP Content Management System
-* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org/>
+* Copyright (c) 2000-2016 XOOPS.org <https://xoops.org>
 */
 $op  = isset($_GET['op']) ? trim($_GET['op']) : '';
 $op  = isset($_POST['op']) ? trim($_POST['op']) : $op;
 $max = 6;
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 $minisHandler = xoops_getModuleHandler('mini');
 
 switch ($op) {
     default:
-        include_once XOOPS_ROOT_PATH . '/modules/' . basename(dirname(__DIR__)) . '/class/xoopstree.php';
-        include_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/modules/' . basename(dirname(__DIR__)) . '/class/xoopstree.php';
+        require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         #$news = new XoopsTree($xoopsDB->prefix("stories"), "storyid", "0");
         $news = new SpotlightXoopsTree($xoopsDB->prefix('news_topics'), 'topic_id', '0');
         $imgs = XoopsLists::getImgListAsArray(XOOPS_ROOT_PATH . '/' . $xoopsModuleConfig['uploaddir']);
         xoops_cp_header();
         //  spot_adminmenu(_AM_SPOT_NAME_MINI);
-        $form = new XoopsThemeForm(_AM_SPOT_NAME_MINI, 'mini', xoops_getenv('PHP_SELF'));
+        $form = new XoopsThemeForm(_AM_SPOT_NAME_MINI, 'mini', xoops_getenv('PHP_SELF'), 'post', true);
         for ($i = 1; $i < $max; ++$i) {
             if (!$mini = $minisHandler->get($i)) {
                 $mini = $minisHandler->create();
@@ -44,10 +44,20 @@ switch ($op) {
             $select_img[$i] = new XoopsFormSelect('', 'img[' . $i . ']', $mini->getVar('mini_img'));
             $select_img[$i]->addOption('', '----');
             $select_img[$i]->addOptionArray($imgs);
-            $select_img[$i]->setExtra('onchange="if (this.options[this.selectedIndex].value != \'\') { document.mini.img' . $i . '.src=\'' . XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/'
-                                      . '\' + this.options[this.selectedIndex].value; } else { document.mini.img' . $i . '.src=\'' . XOOPS_UPLOAD_URL . '/blank.gif\'; }"');
+            $select_img[$i]->setExtra('onchange="if (this.options[this.selectedIndex].value != \'\') { document.mini.img'
+                                      . $i
+                                      . '.src=\''
+                                      . XOOPS_URL
+                                      . '/'
+                                      . $xoopsModuleConfig['uploaddir']
+                                      . '/'
+                                      . '\' + this.options[this.selectedIndex].value; } else { document.mini.img'
+                                      . $i
+                                      . '.src=\''
+                                      . XOOPS_UPLOAD_URL
+                                      . '/blank.gif\'; }"');
             $tray[$i]->addElement($select_img[$i]);
-            $tray[$i]->addElement(new XoopsFormLabel('', '<img id="img' . $i . '" src="' . $img . '" alt="' . $mini->getVar('mini_img') . '" />'));
+            $tray[$i]->addElement(new XoopsFormLabel('', '<img id="img' . $i . '" src="' . $img . '" alt="' . $mini->getVar('mini_img') . '">'));
 
             $form->addElement(new XoopsFormLabel('', '<strong>' . _AM_SPOT_MINI . $i . '</strong>'));
             $form->addElement(new XoopsFormRadioYN(_AM_SPOT_MINI_SHOW, 'show[' . $i . ']', $mini->getVar('mini_show')));

@@ -10,12 +10,18 @@
  * Licence: GNU
  */
 
-use Xmf\Module\Admin;
-use Xmf\Module\Helper;
-
-$pathIcon32 = Admin::menuIconPath('');
 $moduleDirName = basename(dirname(__DIR__));
 
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+$adminObject = \Xmf\Module\Admin::getInstance();
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+
+$moduleHelper->loadLanguage('modinfo');
 
 $adminmenu[] = array(
     'title' => _AM_MODULEADMIN_HOME,
@@ -54,6 +60,3 @@ $adminmenu[] = array(
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
 );
-
-
-

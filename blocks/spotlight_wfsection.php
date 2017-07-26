@@ -10,8 +10,8 @@
  * Licence: GNU
  */
 
-include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
-include_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
+require_once XOOPS_ROOT_PATH . '/modules/spotlight/include/functions.php';
 
 /**
  * @param $options
@@ -23,10 +23,10 @@ function b_spotlight_show_wfsection($options)
 
     $myts = MyTextSanitizer::getInstance();
 
-    $modhandler        = xoops_getHandler('module');
-    $xoopsModule       = &$modhandler->getByDirname('spotlight');
-    $configHandler    = xoops_getHandler('config');
-    $xoopsModuleConfig = &$configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
+    $moduleHandler     = xoops_getHandler('module');
+    $xoopsModule       = $moduleHandler->getByDirname('spotlight');
+    $configHandler     = xoops_getHandler('config');
+    $xoopsModuleConfig =& $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     $fhometext = '';
     $block     = array();
@@ -47,8 +47,13 @@ function b_spotlight_show_wfsection($options)
         $result = $xoopsDB->query('SELECT articleid, uid, title, maintext, summary, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks  FROM ' . $xoopsDB->prefix('wfs_article') . ' WHERE articleid=' . $item . ' ', 1, 0);
     } else {
         // auto selection
-        $result = $xoopsDB->query('SELECT articleid, uid, title, maintext, summary, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks FROM ' . $xoopsDB->prefix('wfs_article') . ' WHERE published < ' . time()
-                                  . ' AND published > 0 AND (expired = 0 OR expired > ' . time() . ') AND noshowart = 0 ORDER BY published DESC', 1, 0);
+        $result = $xoopsDB->query('SELECT articleid, uid, title, maintext, summary, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks FROM '
+                                  . $xoopsDB->prefix('wfs_article')
+                                  . ' WHERE published < '
+                                  . time()
+                                  . ' AND published > 0 AND (expired = 0 OR expired > '
+                                  . time()
+                                  . ') AND noshowart = 0 ORDER BY published DESC', 1, 0);
     }
     list($fsid, $fautore, $ftitle, $fmaintext, $fsummary, $frating, $fnohtml, $fnosmiley, $fnoxcodes, $fnobreaks) = $xoopsDB->fetchRow($result);
 
@@ -88,8 +93,7 @@ function b_spotlight_show_wfsection($options)
             }
 
             if ($xoopsModuleConfig['wfssthumbs']) {
-                $block['image'] = spot_createthumb($block['image'], XOOPS_ROOT_PATH, '/' . $block['imgpath'] . '/', 'thumbs/', $xoopsModuleConfig['wfdmaximgwidth'], $xoopsModuleConfig['wfdmaximgheight'], $xoopsModuleConfig['wfimagequality'],
-                                                   $xoopsModuleConfig['updatethumbs']);
+                $block['image'] = spot_createthumb($block['image'], XOOPS_ROOT_PATH, '/' . $block['imgpath'] . '/', 'thumbs/', $xoopsModuleConfig['wfdmaximgwidth'], $xoopsModuleConfig['wfdmaximgheight'], $xoopsModuleConfig['wfimagequality'], $xoopsModuleConfig['updatethumbs']);
                 $block['image'] = 'thumbs/' . basename($block['image']);
             }
         }
@@ -122,8 +126,17 @@ function b_spotlight_show_wfsection($options)
 
     if ($xoopsModuleConfig['wfshowmoreart']) {
         $block['lang_other_articles'] = _MB_SPOT_OTHER_WFSSTEXT;
-        $nsql                         = 'SELECT articleid, title, maintext, summary, changed, published, expired, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks FROM ' . $xoopsDB->prefix('wfs_article')
-                                        . ' WHERE (published > 0 AND published <= ' . time() . ') AND (expired = 0 OR expired > ' . time() . ') AND noshowart = 0 AND offline = 0 AND articleid != ' . $fsid . ' ORDER BY ' . $options[0] . ' DESC';
+        $nsql                         = 'SELECT articleid, title, maintext, summary, changed, published, expired, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks FROM '
+                                        . $xoopsDB->prefix('wfs_article')
+                                        . ' WHERE (published > 0 AND published <= '
+                                        . time()
+                                        . ') AND (expired = 0 OR expired > '
+                                        . time()
+                                        . ') AND noshowart = 0 AND offline = 0 AND articleid != '
+                                        . $fsid
+                                        . ' ORDER BY '
+                                        . $options[0]
+                                        . ' DESC';
         $nresult                      = $xoopsDB->query($nsql, $xoopsModuleConfig['wfperpage'], 0);
         $amount                       = $xoopsDB->getRowsNum($nresult);
 
@@ -180,7 +193,7 @@ function b_spotlight_show_wfsection($options)
         // rb topic select form for news direct topic access
         $topic_options   = '';
         $block['catsel'] = '';
-        $sql             = 'SELECT id, title FROM ' . $xoopsDB->prefix('wfs_category') . ' order by title ASC';
+        $sql             = 'SELECT id, title FROM ' . $xoopsDB->prefix('wfs_category') . ' ORDER BY title ASC';
         if (!$r = $xoopsDB->query($sql)) {
             exit();
         }
@@ -213,13 +226,13 @@ function b_spotlight_show_wfsection($options)
         $result = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('wfs_article') . '');
         list($news) = $xoopsDB->fetchRow($result);
 
-        $result = $xoopsDB->query('select sum(counter) FROM ' . $xoopsDB->prefix('wfs_article') . '');
+        $result = $xoopsDB->query('SELECT sum(counter) FROM ' . $xoopsDB->prefix('wfs_article') . '');
         list($storiesviews) = $xoopsDB->fetchRow($result);
 
         $result = $xoopsDB->query('SELECT TRUNCATE((sum(rating)/' . $news . '),1) FROM ' . $xoopsDB->prefix('wfs_article') . '');
         list($rating) = $xoopsDB->fetchRow($result);
 
-        $result = $xoopsDB->query('select sum(votes) FROM ' . $xoopsDB->prefix('wfs_article') . '');
+        $result = $xoopsDB->query('SELECT sum(votes) FROM ' . $xoopsDB->prefix('wfs_article') . '');
         list($votes) = $xoopsDB->fetchRow($result);
 
         $block['ministats'] = _MB_SPOT_PUBLISHED . ': <b>' . $news . '</b> : ' . "\n";
