@@ -55,6 +55,7 @@ class SpotlightXoopsTree
     }
 
     // returns an array of first child objects for a given id($sel_id)
+
     /**
      * @param        $sel_id
      * @param string $order
@@ -81,6 +82,7 @@ class SpotlightXoopsTree
     }
 
     // returns an array of all FIRST child ids of a given id($sel_id)
+
     /**
      * @param $sel_id
      * @return array
@@ -102,6 +104,7 @@ class SpotlightXoopsTree
     }
 
     //returns an array of ALL child ids for a given id($sel_id)
+
     /**
      * @param        $sel_id
      * @param string $order
@@ -129,6 +132,7 @@ class SpotlightXoopsTree
     }
 
     //returns an array of ALL parent ids for a given id($sel_id)
+
     /**
      * @param        $sel_id
      * @param string $order
@@ -232,6 +236,7 @@ class SpotlightXoopsTree
     }
 
     //generates nicely formatted linked path from the root id to a given id
+
     /**
      * @param        $sel_id
      * @param        $title

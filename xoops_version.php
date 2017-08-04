@@ -28,22 +28,19 @@
 //              Adapted for XOOPS 2.0 by Herko and dAWiLbY                   //
 //              Features modified by Vinit                                   //
 //---------------------------------------------------------------------------//
-$modversion['version']       = 2.3;
-$modversion['module_status'] = 'RC 1';
-$modversion['release_date']  = '2016/11/26';
-$modversion['name']          = _MI_SPOT_NAME;
-$modversion['description']   = _MI_SPOT_DESC;
-$modversion['author']        = 'Spark [http://linux.kuht.it]';
-$modversion['credits']       = 'Adapted for XOOPS 2.0<br>by<br>Herko, dAWiLbY and Catzwolf<br> Features modified by Vinit';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL 2.0 or later';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']         = 'assets/images/logoModule.png';
-$modversion['dirname']       = basename(__DIR__);
-//$modversion['dirmoduleadmin']      = '/Frameworks/moduleclasses/moduleadmin';
-//$modversion['icons16']             = '../../Frameworks/moduleclasses/icons/16';
-//$modversion['icons32']             = '../../Frameworks/moduleclasses/icons/32';
+$modversion['version']             = 2.4;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2017/11/26';
+$modversion['name']                = _MI_SPOT_NAME;
+$modversion['description']         = _MI_SPOT_DESC;
+$modversion['author']              = 'Spark [http://linux.kuht.it]';
+$modversion['credits']             = 'Adapted for XOOPS 2.0<br>by<br>Herko, dAWiLbY and Catzwolf<br> Features modified by Vinit';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0 or later';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['dirname']             = basename(__DIR__);
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
@@ -59,6 +56,14 @@ $modversion['hasAdmin']    = 1;
 $modversion['system_menu'] = 1;
 $modversion['adminindex']  = 'admin/index.php?op=news';
 $modversion['adminmenu']   = 'admin/menu.php';
+
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_SPOT_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_SPOT_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_SPOT_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_SPOT_SUPPORT, 'link' => 'page=support'],
+);
 
 // Blocks
 $modversion['blocks'][1]['file']        = 'spotlight_news.php';

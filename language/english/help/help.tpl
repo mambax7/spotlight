@@ -1,12 +1,7 @@
 <div id="help-template" class="outer">
-    <h1 class="head">Help:
-        <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/spotlight/admin/index.php"
-           title="Back to the administration of Spotlight"> Spotlight
-            <img src="<{xoAdminIcons home.png}>"
-                 alt="Back to the Administration of Spotlight">
-        </a></h1>
+    <{include file=$smarty.const._MI_SPOT_HELP_HEADER}>
 
-    <h4 class="odd">DESCRIPTION</h4>
+    <h4 class="odd">DESCRIPTION</h4> <br>
     <br>
     <p>This module puts a News item in a central spotlight block. It has the following features:<br> <br>
 

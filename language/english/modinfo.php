@@ -79,3 +79,17 @@ define('_MI_SPOT_WFREMIMGTEAS', 'Remove Images from WF-Section Article Teasers?'
 //2.3
 define('_MI_SPOT_CONFIG_WF', '<strong>WF-Section</strong>');
 define('_MI_SPOT_CONFIG_WF_DSC', 'Preferences for WF-Section');
+
+//2.4
+//Help
+define('_MI_SPOT_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_SPOT_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_SPOT_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_SPOT_OVERVIEW', 'Overview');
+
+//define('_MI_SPOT_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_SPOT_DISCLAIMER', 'Disclaimer');
+define('_MI_SPOT_LICENSE', 'License');
+define('_MI_SPOT_SUPPORT', 'Support');
