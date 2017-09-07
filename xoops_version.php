@@ -49,7 +49,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // Admin things
 $modversion['hasAdmin']    = 1;
@@ -58,12 +58,12 @@ $modversion['adminindex']  = 'admin/index.php?op=news';
 $modversion['adminmenu']   = 'admin/menu.php';
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_SPOT_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_SPOT_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_SPOT_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_SPOT_SUPPORT, 'link' => 'page=support'],
-);
+];
 
 // Blocks
 $modversion['blocks'][1]['file']        = 'spotlight_news.php';
@@ -197,7 +197,7 @@ $modversion['config'][14]['description'] = '';
 $modversion['config'][14]['formtype']    = 'select';
 $modversion['config'][14]['valuetype']   = 'int';
 $modversion['config'][14]['default']     = 5;
-$modversion['config'][14]['options']     = array(
+$modversion['config'][14]['options']     = [
     '1'  => 1,
     '2'  => 2,
     '3'  => 3,
@@ -206,7 +206,7 @@ $modversion['config'][14]['options']     = array(
     '10' => 10,
     '15' => 15,
     '20' => 20
-);
+];
 
 $modversion['config'][15]['name']        = 'showtopicbox';
 $modversion['config'][15]['title']       = '_MI_SPOT_TOPICS';
@@ -259,7 +259,7 @@ $modversion['config'][21]['default']     = 1;
 
 //wfsection block config
 // group header
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'      => 'extrasystems_configs',
     'title'     => '_MI_SPOT_CONFIG_WF',
     //    'description' => '_MI_SPOT_CONFIG_WF_DSC',
@@ -267,7 +267,7 @@ $modversion['config'][] = array(
     'valuetype' => 'textbox',
     'default'   => 'odd',
     'category'  => 'group_header'
-);
+];
 
 $modversion['config'][22]['name']        = 'wfssthumbs';
 $modversion['config'][22]['title']       = '_MI_SPOT_WFSSHOWTHUMBS';
@@ -323,7 +323,7 @@ $modversion['config'][29]['description'] = '';
 $modversion['config'][29]['formtype']    = 'select';
 $modversion['config'][29]['valuetype']   = 'int';
 $modversion['config'][29]['default']     = 5;
-$modversion['config'][29]['options']     = array(
+$modversion['config'][29]['options']     = [
     '1'  => 1,
     '2'  => 2,
     '3'  => 3,
@@ -332,7 +332,7 @@ $modversion['config'][29]['options']     = array(
     '10' => 10,
     '15' => 15,
     '20' => 20
-);
+];
 
 $modversion['config'][30]['name']        = 'wfshowtopicbox';
 $modversion['config'][30]['title']       = '_MI_SPOT_WFTOPICS';

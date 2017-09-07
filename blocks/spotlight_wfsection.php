@@ -29,7 +29,7 @@ function b_spotlight_show_wfsection($options)
     $xoopsModuleConfig =& $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     $fhometext = '';
-    $block     = array();
+    $block     = [];
 
     $block['title_wfsection'] = _MB_SPOT_TITLE_SPOTLIGHT_WFSS;
     $block['lang_by']         = _MB_SPOT_AUTORE;
@@ -118,7 +118,7 @@ function b_spotlight_show_wfsection($options)
             $fsummary = preg_replace("/(\<img)(.*?)(\>)/si", '', $fsummary);
         }
         $fsummary                   = $myts->displayTarea(trim($fsummary), $html, $smiley, $xcodes, 1, $breaks);
-        $fsummary                   = preg_replace(array('/[ \t]{2,}/', '/(\n|\r|\r\n){2,}/'), array(' ', ' '), trim($fsummary));
+        $fsummary                   = preg_replace(['/[ \t]{2,}/', '/(\n|\r|\r\n){2,}/'], [' ', ' '], trim($fsummary));
         $block['summary_wfsection'] = trim($fsummary);
         $block['articleid']         = $myts->htmlSpecialChars($fsid);
         $block['rating']            = $myts->htmlSpecialChars($frating);
@@ -140,7 +140,7 @@ function b_spotlight_show_wfsection($options)
         $nresult                      = $xoopsDB->query($nsql, $xoopsModuleConfig['wfperpage'], 0);
         $amount                       = $xoopsDB->getRowsNum($nresult);
 
-        $wfss = array();
+        $wfss = [];
 
         if ($amount >= 1) {
             $news['total'] = 1;
@@ -167,7 +167,7 @@ function b_spotlight_show_wfsection($options)
 
                     $summary = $myts->displayTarea(trim($myrow['summary']), $html, $smiley, $xcodes, 1, $breaks);
                     if ($breaks) {
-                        $summary = preg_replace(array('/[ \t]{2,}/', '/(\n|\r|\r\n){2,}/'), array(' ', ' '), trim($summary));
+                        $summary = preg_replace(['/[ \t]{2,}/', '/(\n|\r|\r\n){2,}/'], [' ', ' '], trim($summary));
                     }
                     if ($xoopsModuleConfig['wfremimgteas']) {
                         $summary = preg_replace("/(\<img)(.*?)(\>)/si", '', $summary);

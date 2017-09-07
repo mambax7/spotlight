@@ -35,7 +35,7 @@ switch ($op) {
             if (file_exists(XOOPS_ROOT_PATH . '/' . $_POST['uploadpath'] . '/' . $_FILES['uploadfile']['name'])) {
                 redirect_header('upload.php', 1, _AM_SPOT_CHANIMAGEEXIST);
             }
-            $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png');
+            $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png'];
             spot_uploading($allowed_mimetypes, $_FILES['uploadfile']['name'], 'upload.php', 0, $_POST['uploadpath'], 1);
         } else {
             redirect_header('upload.php', '2', _AM_SPOT_CHANNOIMAGEEXIST);
@@ -58,12 +58,12 @@ switch ($op) {
             exit();
         } else {
             xoops_cp_header();
-            xoops_confirm(array(
+            xoops_confirm([
                               'op'          => 'delfile',
                               'uploadpath'  => $_POST['uploadpath'],
                               'channelfile' => $_POST['channelfile'],
                               'confirm'     => 1
-                          ), 'upload.php', _AM_SPOT_DELETEFILE . '<b><br>' . $_POST['channelfile'], 'Delete');
+                          ], 'upload.php', _AM_SPOT_DELETEFILE . '<b><br>' . $_POST['channelfile'], 'Delete');
         }
         break;
 
@@ -76,9 +76,9 @@ switch ($op) {
 
         global $xoopsUser, $xoopsUser, $xoopsConfig, $xoopsDB, $xoopsModuleConfig;
 
-        $dirarray     = array(0 => '0', 1 => $xoopsModuleConfig['uploaddir'], 2 => $xoopsModuleConfig['wfuploaddir']);
-        $namearray    = array(0 => 'Choose Upload Type', 1 => _AM_SPOT_NEWSIMAGES, 2 => _AM_SPOT_WFSECTIONIMAGES);
-        $listarray    = array(0 => '', 1 => _AM_SPOT_UPLOADCHANLOGO, 2 => _AM_SPOT_UPLOADLINKIMAGE);
+        $dirarray     = [0 => '0', 1 => $xoopsModuleConfig['uploaddir'], 2 => $xoopsModuleConfig['wfuploaddir']];
+        $namearray    = [0 => 'Choose Upload Type', 1 => _AM_SPOT_NEWSIMAGES, 2 => _AM_SPOT_WFSECTIONIMAGES];
+        $listarray    = [0 => '', 1 => _AM_SPOT_UPLOADCHANLOGO, 2 => _AM_SPOT_UPLOADLINKIMAGE];
         $displayimage = '';
         //        $safemode     = ini_get('safe_mode') ? _AM_SPOT_ON . _AM_SPOT_SAFEMODEPROBLEMS : _AM_SPOT_OFF;
         $downloads = ini_get('enable_dl') ? _AM_SPOT_ON : _AM_SPOT_OFF;

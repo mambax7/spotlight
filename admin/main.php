@@ -67,11 +67,11 @@ function spotlightNewsForm()
         $imagealign = 'left';
     }
     $imagealign_select = new XoopsFormSelect(_AM_SPOT_IMAGEALIGN, 'imagealign', $imagealign);
-    $imagealign_select->addOptionArray(array(
+    $imagealign_select->addOptionArray([
                                            'left'   => _AM_SPOT_LEFT,
                                            'center' => _AM_SPOT_CENTER,
                                            'right'  => _AM_SPOT_RIGHT
-                                       ));
+                                       ]);
     $sform->addElement($imagealign_select);
 
     if (!$indeximage) {
@@ -159,11 +159,11 @@ function spotlightWFSectionForm()
         $imagealign = 'left';
     }
     $imagealign_select = new XoopsFormSelect(_AM_SPOT_IMAGEALIGN, 'imagealign', $imagealign);
-    $imagealign_select->addOptionArray(array(
+    $imagealign_select->addOptionArray([
                                            'left'   => _AM_SPOT_LEFT,
                                            'center' => _AM_SPOT_CENTER,
                                            'right'  => _AM_SPOT_RIGHT
-                                       ));
+                                       ]);
     $sform->addElement($imagealign_select);
 
     if (!$indeximage) {

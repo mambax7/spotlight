@@ -102,7 +102,7 @@ switch ($op) {
         }
         break;
     case 'manage':
-        $del = isset($_POST['del']) ? $_POST['del'] : array();
+        $del = isset($_POST['del']) ? $_POST['del'] : [];
         if (count($del) > 0) {
             $ids      = implode(',', $del);
             $criteria = new Criteria('xml_id', '(' . $ids . ')', 'IN');

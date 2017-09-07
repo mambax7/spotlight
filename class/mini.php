@@ -132,7 +132,7 @@ class SpotlightMiniHandler extends XoopsObjectHandler
      */
     public function &getObjects($show_only = true, $id_as_key = false)
     {
-        $ret      = array();
+        $ret      = [];
         $sql      = 'SELECT m.*, n.title, n.published, n.expired FROM ' . $this->db_table . ' m, ' . $this->db->prefix('news_stories') . ' n';
         $criteria = new CriteriaCompo();
         if ($show_only) {

@@ -37,7 +37,7 @@ switch ($op) {
             $stories[$i] = new XoopsFormLabel(_AM_SPOT_SELECT_SPOTLIGHT_TOPIC, ob_get_contents());
             ob_end_clean();
             $align[$i] = new XoopsFormSelect(_AM_SPOT_IMAGEALIGN, 'align[' . $i . ']', $mini->getVar('mini_align'));
-            $align[$i]->addOptionArray(array(0 => _AM_SPOT_LEFT, 1 => _AM_SPOT_RIGHT));
+            $align[$i]->addOptionArray([0 => _AM_SPOT_LEFT, 1 => _AM_SPOT_RIGHT]);
 
             $img            = $mini->getVar('mini_img') != '' ? XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/' . $mini->getVar('mini_img') : XOOPS_UPLOAD_URL . '/blank.gif';
             $tray[$i]       = new XoopsFormElementTray(_AM_SPOT_SELECT_IMG, '<br>');
@@ -72,7 +72,7 @@ switch ($op) {
         break;
     case 'save':
         extract($_POST);
-        $errors = array();
+        $errors = [];
         for ($i = 1; $i < $max; ++$i) {
             if (!$mini = $minisHandler->get($i)) {
                 $mini = $minisHandler->create();

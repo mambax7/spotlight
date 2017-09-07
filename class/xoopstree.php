@@ -16,7 +16,7 @@
  * @author          Kazumi Ono (AKA onokazu) http://www.myweb.ne.jp/, http://jp.xoops.org/
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Abstract base class for forms
@@ -64,7 +64,7 @@ class SpotlightXoopsTree
     public function getFirstChild($sel_id, $order = '')
     {
         $sel_id = (int)$sel_id;
-        $arr    = array();
+        $arr    = [];
         $sql    = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
         if ($order != '') {
             $sql .= " ORDER BY $order";
@@ -90,7 +90,7 @@ class SpotlightXoopsTree
     public function getFirstChildId($sel_id)
     {
         $sel_id  = (int)$sel_id;
-        $idarray = array();
+        $idarray = [];
         $result  = $this->db->query('SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '');
         $count   = $this->db->getRowsNum($result);
         if ($count == 0) {
@@ -111,7 +111,7 @@ class SpotlightXoopsTree
      * @param array  $idarray
      * @return array
      */
-    public function getAllChildId($sel_id, $order = '', $idarray = array())
+    public function getAllChildId($sel_id, $order = '', $idarray = [])
     {
         $sel_id = (int)$sel_id;
         $sql    = 'SELECT ' . $this->id . ' FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -139,7 +139,7 @@ class SpotlightXoopsTree
      * @param array  $idarray
      * @return array
      */
-    public function getAllParentId($sel_id, $order = '', $idarray = array())
+    public function getAllParentId($sel_id, $order = '', $idarray = [])
     {
         $sel_id = (int)$sel_id;
         $sql    = 'SELECT ' . $this->pid . ' FROM ' . $this->table . ' WHERE ' . $this->id . '=' . $sel_id . '';
@@ -297,7 +297,7 @@ class SpotlightXoopsTree
      * @param array  $parray
      * @return array
      */
-    public function getAllChild($sel_id = 0, $order = '', $parray = array())
+    public function getAllChild($sel_id = 0, $order = '', $parray = [])
     {
         $sel_id = (int)$sel_id;
         $sql    = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';
@@ -326,7 +326,7 @@ class SpotlightXoopsTree
      * @param string|unknown_type $r_prefix
      * @return mixed
      */
-    public function getChildTreeArray($sel_id = 0, $order = '', $parray = array(), $r_prefix = '')
+    public function getChildTreeArray($sel_id = 0, $order = '', $parray = [], $r_prefix = '')
     {
         $sel_id = (int)$sel_id;
         $sql    = 'SELECT * FROM ' . $this->table . ' WHERE ' . $this->pid . '=' . $sel_id . '';

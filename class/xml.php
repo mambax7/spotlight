@@ -151,7 +151,7 @@ class SpotlightXmlHandler extends XoopsObjectHandler
     public function &getObjects($criteria = null, $id_as_key = false)
     {
         $myReturn = false;
-        $ret      = array();
+        $ret      = [];
         $limit    = $start = 0;
         $sql      = 'SELECT * FROM ' . $this->db_table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {

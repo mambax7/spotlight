@@ -46,7 +46,7 @@ function spot_htmlarray($thishtmlpage, $thepath)
  */
 function spot_filesarray($filearray)
 {
-    $files = array();
+    $files = [];
     $dir   = opendir($filearray);
 
     while (($file = readdir($dir)) !== false) {
@@ -150,17 +150,17 @@ function spot_adminmenu($header = '', $extra = '', $menu = '', $scount = 4)
          * You can change this part to suit your own module. Defining this here will save you form having to do this each time.
          */
 
-        $menu = array(
+        $menu = [
             _AM_SPOT_NAME_CONFIG    => '' . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid') . '',
             _AM_SPOT_NAME_NEWSBLOCK => 'index.php?op=news',
             _AM_SPOT_NAME_MINI      => 'mini.php',
             _AM_SPOT_NAME_XML       => 'xml.php',
             _AM_SPOT_NAME_WFSSBLOCK => 'index.php?op=wfsections',
             _AM_SPOT_NAME_UPLOAD    => 'upload.php'
-        );
+        ];
     }
 
-    $oddnum = array(1 => '1', 3 => '3', 5 => '5', 7 => '7', 9 => '9', 11 => '11', 13 => '13');
+    $oddnum = [1 => '1', 3 => '3', 5 => '5', 7 => '7', 9 => '9', 11 => '11', 13 => '13'];
 
     /**
      * the amount of cells per menu row
@@ -233,7 +233,7 @@ function checkSpotAccess($grps, $time = -1, $message = '')
 {
     global $xoopsUser, $xoopsModule;
 
-    $groupid = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+    $groupid = is_object($xoopsUser) ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 
     $grps = explode(' ', $grps);
 
@@ -412,13 +412,13 @@ function spot_removeShouting($string)
     }
 
     // $lower_exceptions = array("to" => "1", "a" => "1", "the" => "1", "of" => "1"
-    $lower_exceptions = array(
+    $lower_exceptions = [
         'to' => '1',
         'of' => '1',
         'WF' => '1'
-    );
+    ];
 
-    $higher_exceptions = array(
+    $higher_exceptions = [
         'I'     => '1',
         'II'    => '1',
         'III'   => '1',
@@ -449,12 +449,12 @@ function spot_removeShouting($string)
         'VIII:' => '1',
         'IX:'   => '1',
         'X:'    => '1'
-    );
+    ];
 
     $string = spot_cleanvars($string);
 
     $words    = preg_split('/ /', $string);
-    $newwords = array();
+    $newwords = [];
     foreach ($words as $word) {
         if (!in_array($word, $higher_exceptions)) {
             $word = strtolower($word);

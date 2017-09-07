@@ -21,7 +21,7 @@ require_once XOOPS_ROOT_PATH . '/modules/news/class/class.newsstory.php';
  */
 function spotlight_show_news($options)
 {
-    $block = array();
+    $block = [];
 
     global $xoopsDB, $xoopsConfig, $myts, $xoopsModuleConfig, $xoopsModule;
     XoopsLoad::load('XoopsUserUtility');
@@ -38,8 +38,8 @@ function spotlight_show_news($options)
      */
     $minisHandler = xoops_getModuleHandler('mini', 'spotlight');
     if ($minis = $minisHandler->getObjects()) {
-        $block['mini'] = array();
-        $excludes      = array();
+        $block['mini'] = [];
+        $excludes      = [];
         foreach ($minis as $m) {
             if ($m->getVar('published') > 0 && $m->getVar('published') < time()
                 && ($m->getVar('expired') > time()
@@ -75,12 +75,12 @@ function spotlight_show_news($options)
 
                     $mini_news_text = substr($mini_news_text, 0, 400) . '...';
 
-                    $block['mini'][$storyid] = array(
+                    $block['mini'][$storyid] = [
                         'storyid' => $storyid,
                         'text'    => $mini_news_text,
                         'img'     => $m->getVar('mini_img'),
                         'align'   => $m->getVar('mini_align') ? 'right' : 'left'
-                    );
+                    ];
                     $excludes[]              = $storyid;
                 }
             }
@@ -169,7 +169,7 @@ function spotlight_show_news($options)
     if ($xoopsModuleConfig['showmoreart']) {
         $block['lang_other_news'] = _MB_SPOT_OTHER_NEWSTEXT;
 
-        $news   = array();
+        $news   = [];
         $sarray = NewsStory::getAllPublished($xoopsModuleConfig['perpage'], 0, 0);
         $news   = '';
         foreach ($sarray as $article) {
