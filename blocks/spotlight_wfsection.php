@@ -42,7 +42,7 @@ function b_spotlight_show_wfsection($options)
     $result = $xoopsDB->query('SELECT item, auto, image, auto_image, imagealign FROM ' . $xoopsDB->prefix('spotlight') . ' WHERE sid = 2', 1, 0);
     list($item, $auto, $image, $auto_image, $imagealign) = $xoopsDB->fetchRow($result);
 
-    if ($auto == 0) {
+    if (0 == $auto) {
         // no auto selection
         $result = $xoopsDB->query('SELECT articleid, uid, title, maintext, summary, TRUNCATE(rating,1), nohtml, nosmiley, noxcodes, nobreaks  FROM ' . $xoopsDB->prefix('wfs_article') . ' WHERE articleid=' . $item . ' ', 1, 0);
     } else {
@@ -151,9 +151,9 @@ function b_spotlight_show_wfsection($options)
                 }
                 $wfss['title'] = spot_removeShouting(trim($title));
                 $wfss['id']    = $myrow['articleid'];
-                if ($options[0] === 'published') {
+                if ('published' === $options[0]) {
                     $wfss['hitsordate'] = formatTimestamp($myrow['published'], 's');
-                } elseif ($options[0] === 'changed') {
+                } elseif ('changed' === $options[0]) {
                     $wfss['hitsordate'] = formatTimestamp($myrow['changed'], 's');
                 } else {
                     $wfss['hitsordate'] = $myrow['rating'];
@@ -210,7 +210,7 @@ function b_spotlight_show_wfsection($options)
                 $topic_options .= '<option value="' . $id . '">' . $title . '</option>' . '';
             } while ($row = $xoopsDB->fetchArray($r));
         }
-        if ($topic_options <> '') {
+        if ('' <> $topic_options) {
             $block['catsel'] = '<form action="' . XOOPS_URL . '/modules/wfsection/index.php? method="post">' . '';
             $block['catsel'] .= '<select name="storytopic" onchange="submit();">' . '';
             $block['catsel'] .= '<option value="0" selected>' . _MB_SPOT_CHOOSE_WFSS . '</option>' . '';
@@ -256,17 +256,17 @@ function b_spotlight_edit_wfsection($options)
 {
     $form .= _MB_SPOT_ORDER . '<select name="options[0]">' . "\n";
     $form .= '<option value="published"';
-    if ($options[0] === 'published') {
+    if ('published' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>&nbsp;' . _MB_SPOT_CHNG . '</option>' . "\n";
     $form .= '<option value="changed"';
-    if ($options[0] === 'changed') {
+    if ('changed' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>&nbsp;' . _MB_SPOT_DATE . '</option>' . "\n";
     $form .= '<option value="rating"';
-    if ($options[0] === 'rating') {
+    if ('rating' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>&nbsp;' . _MB_SPOT_HITS . '</option>' . "\n";

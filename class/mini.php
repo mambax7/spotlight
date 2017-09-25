@@ -94,7 +94,7 @@ class SpotlightMiniHandler extends XoopsObjectHandler
                 return false;
             }
             $numrows = $this->db->getRowsNum($result);
-            if ($numrows == 1) {
+            if (1 == $numrows) {
                 $obj = new $this->obj_class();
                 $obj->assignVars($this->db->fetchArray($result));
 

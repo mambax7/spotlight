@@ -43,7 +43,7 @@ function spotlight_show_news($options)
         foreach ($minis as $m) {
             if ($m->getVar('published') > 0 && $m->getVar('published') < time()
                 && ($m->getVar('expired') > time()
-                    || $m->getVar('expired') == 0)) {
+                    || 0 == $m->getVar('expired'))) {
                 $topicid = $m->getVar('topicid');
 
                 /**
@@ -103,13 +103,13 @@ function spotlight_show_news($options)
     $sql      = 'SELECT * FROM ' . $xoopsDB->prefix('spotlight') . ' WHERE sid = 1';
     $spot_arr = $xoopsDB->fetchArray($xoopsDB->query($sql));
 
-    if (isset($spot_arr['auto']) && $spot_arr['auto'] == 0) {
+    if (isset($spot_arr['auto']) && 0 == $spot_arr['auto']) {
         // Selects user choosen news
         $article = new NewsStory($spot_arr['item']);
     } else {
     }
 
-    if (isset($spot_arr['auto']) && $spot_arr['auto'] == 1) {
+    if (isset($spot_arr['auto']) && 1 == $spot_arr['auto']) {
         // selects the last addition to news
         $result2 = $xoopsDB->query('SELECT storyid, title FROM ' . $xoopsDB->prefix('news_stories') . ' WHERE published > 0 AND published < ' . time() . ' AND (expired > ' . time() . ' OR expired = 0) ORDER BY published DESC', 1, 0);
         list($fsid, $ftitle) = $xoopsDB->fetchRow($result2);
@@ -180,7 +180,7 @@ function spotlight_show_news($options)
                     $title = xoops_substr($title, 0, $xoopsModuleConfig['titlelenght'], $trimmarker = '...');
                 }
                 $news['title']      = spot_removeShouting($title);
-                $news['hitsordate'] = ($options[0] === 'published') ? formatTimestamp($article->published(), 's') : $article->counter();
+                $news['hitsordate'] = ('published' === $options[0]) ? formatTimestamp($article->published(), 's') : $article->counter();
                 if ($xoopsModuleConfig['showteaser']) {
                     $fhometext = $article->hometext();
 
@@ -241,12 +241,12 @@ function spotlight_edit_news($options)
 {
     $form = _MB_SPOT_ORDER . ' <select name="options[0]">' . "\n";
     $form .= '<option value="published"';
-    if ($options[0] === 'published') {
+    if ('published' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>&nbsp;' . _MB_SPOT_DATE . '</option>' . "\n";
     $form .= '<option value="counter"';
-    if ($options[0] === 'counter') {
+    if ('counter' === $options[0]) {
         $form .= ' selected';
     }
     $form .= '>&nbsp;' . _MB_SPOT_HITS . '</option>' . "\n";

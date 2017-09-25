@@ -31,7 +31,7 @@ switch ($op) {
 
         global $_POST;
 
-        if ($_FILES['uploadfile']['name'] != '') {
+        if ('' != $_FILES['uploadfile']['name']) {
             if (file_exists(XOOPS_ROOT_PATH . '/' . $_POST['uploadpath'] . '/' . $_FILES['uploadfile']['name'])) {
                 redirect_header('upload.php', 1, _AM_SPOT_CHANIMAGEEXIST);
             }
@@ -45,7 +45,7 @@ switch ($op) {
 
     case 'delfile':
 
-        if (isset($confirm) && $confirm == 1) {
+        if (isset($confirm) && 1 == $confirm) {
             $filetodelete = XOOPS_ROOT_PATH . '/' . $_POST['uploadpath'] . '/' . $_POST['channelfile'];
             if (file_exists($filetodelete)) {
                 chmod($filetodelete, 0666);

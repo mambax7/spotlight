@@ -39,7 +39,7 @@ switch ($op) {
             $align[$i] = new XoopsFormSelect(_AM_SPOT_IMAGEALIGN, 'align[' . $i . ']', $mini->getVar('mini_align'));
             $align[$i]->addOptionArray([0 => _AM_SPOT_LEFT, 1 => _AM_SPOT_RIGHT]);
 
-            $img            = $mini->getVar('mini_img') != '' ? XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/' . $mini->getVar('mini_img') : XOOPS_UPLOAD_URL . '/blank.gif';
+            $img            = '' != $mini->getVar('mini_img') ? XOOPS_URL . '/' . $xoopsModuleConfig['uploaddir'] . '/' . $mini->getVar('mini_img') : XOOPS_UPLOAD_URL . '/blank.gif';
             $tray[$i]       = new XoopsFormElementTray(_AM_SPOT_SELECT_IMG, '<br>');
             $select_img[$i] = new XoopsFormSelect('', 'img[' . $i . ']', $mini->getVar('mini_img'));
             $select_img[$i]->addOption('', '----');

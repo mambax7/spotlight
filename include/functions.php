@@ -49,9 +49,9 @@ function spot_filesarray($filearray)
     $files = [];
     $dir   = opendir($filearray);
 
-    while (($file = readdir($dir)) !== false) {
+    while (false !== ($file = readdir($dir))) {
         if (!preg_match("/^[.]{1,2}$/", $file) && preg_match("/[.htm|.html|.xhtml]$/i", $file) && !is_dir($file)) {
-            if (strtolower($file) !== 'cvs' && !is_dir($file)) {
+            if ('cvs' !== strtolower($file) && !is_dir($file)) {
                 $files[$file] = $file;
             }
         }
@@ -75,7 +75,7 @@ function spot_getDirSelectOption($selected, $dirarray, $namearray, $addnull = 0)
 {
     // global $workd;
     echo "<select size='1' name='workd' onchange='location.href=\"upload.php?rootpath=\"+this.options[this.selectedIndex].value'>";
-    if ($addnull == 1) {
+    if (1 == $addnull) {
         echo "<option value=''>--------------------------------------</option>";
     }
     foreach ($namearray as $namearray => $workd) {
@@ -198,11 +198,11 @@ function spot_adminmenu($header = '', $extra = '', $menu = '', $scount = 4)
                 /**
                  * If $class is the same for the end and start cells, invert $class
                  */
-                $class = ($class === 'odd' && in_array($count, $oddnum)) ? 'even' : 'odd';
+                $class = ('odd' === $class && in_array($count, $oddnum)) ? 'even' : 'odd';
                 echo '</tr>';
                 $count = 0;
             } else {
-                $class = ($class === 'even') ? 'odd' : 'even';
+                $class = ('even' === $class) ? 'odd' : 'even';
             }
         }
         /**
@@ -212,7 +212,7 @@ function spot_adminmenu($header = '', $extra = '', $menu = '', $scount = 4)
             $counter = 0;
             while ($counter < $scount - $count) {
                 echo '<td class="' . $class . '">&nbsp;</td>';
-                $class = ($class === 'even') ? 'odd' : 'even';
+                $class = ('even' === $class) ? 'odd' : 'even';
                 ++$counter;
             }
         }
@@ -296,7 +296,7 @@ function spot_createthumb(
     /**
      * echo "get orginal image path: ".$image_path."<br>";
      */
-    if ($update == 0 && file_exists($savepath)) {
+    if (0 == $update && file_exists($savepath)) {
         return $savepath;
     } else {
         if (file_exists($savepath)) {
@@ -304,12 +304,12 @@ function spot_createthumb(
         }
         $img = '';
 
-        if ($ext === 'jpg' || $ext === 'jpeg') {
+        if ('jpg' === $ext || 'jpeg' === $ext) {
             $img = @imagecreatefromjpeg($image_path);
-        } elseif ($ext === 'png') {
+        } elseif ('png' === $ext) {
             $img = @imagecreatefrompng($image_path);
             // Only if your version of GD includes GIF support
-        } elseif ($ext === 'gif') {
+        } elseif ('gif' === $ext) {
             // Only if your version of GD includes GIF support
             if (function_exists('imagecreatefromgif')) {
                 $img = @imagecreatefromgif($image_path);
@@ -326,7 +326,7 @@ function spot_createthumb(
             // }
             // If the image is larger than the max shrink it
             if ($scale < 1) {
-                if ($aspect == 1) {
+                if (1 == $aspect) {
                     $new_width  = floor($scale * $width);
                     $new_height = floor($scale * $height);
                 } else {
@@ -357,9 +357,9 @@ function spot_createthumb(
             imageline($img, $new_w, 0, 0, $new_h, $c);
             imagestring($img, 4, $center_w, $center_h, 'Image', $c);
         }
-        if ($ext === 'jpeg' || $ext === 'jpg' || $ext === 'gif') {
+        if ('jpeg' === $ext || 'jpg' === $ext || 'gif' === $ext) {
             imagejpeg($img, $savepath, $quality);
-        } elseif ($ext === 'png') {
+        } elseif ('png' === $ext) {
             imagepng($img, $savepath);
         } else {
             imagejpeg($img, $savepath, $quality);
@@ -492,8 +492,8 @@ function spot_summarize($string, $limit = 10)
     while ($tok) {
         $text .= " $tok";
         if (($words >= $limit)
-            && ((substr($tok, -1) === '!') || (substr($tok, -1) === '.')
-                || (substr($tok, -1) === ' '))) {
+            && (('!' === substr($tok, -1)) || ('.' === substr($tok, -1))
+                || (' ' === substr($tok, -1)))) {
             return trim($text);
             unset($text);
         }

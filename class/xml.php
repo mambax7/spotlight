@@ -112,7 +112,7 @@ class SpotlightXmlHandler extends XoopsObjectHandler
                 return false;
             }
             $numrows = $this->db->getRowsNum($result);
-            if ($numrows == 1) {
+            if (1 == $numrows) {
                 $obj = new $this->obj_class();
                 $obj->assignVars($this->db->fetchArray($result));
 
@@ -156,7 +156,7 @@ class SpotlightXmlHandler extends XoopsObjectHandler
         $sql      = 'SELECT * FROM ' . $this->db_table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();

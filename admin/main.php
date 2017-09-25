@@ -251,7 +251,7 @@ switch ($op) {
         $auto_image = isset($auto_image) ? $auto_image : 0;
         $imagealign = addslashes($_POST['imagealign']);
 
-        $image = ($_POST['indeximage'] !== 'blank.png') ? $myts->makeTboxData4Save($_POST['indeximage']) : '';
+        $image = ('blank.png' !== $_POST['indeximage']) ? $myts->makeTboxData4Save($_POST['indeximage']) : '';
 
         $sql    = sprintf('UPDATE ' . $xoopsDB->prefix('spotlight') . " SET item='" . $item . "', auto='" . $auto . "', image='" . $image . "', auto_image='" . $auto_image . "', imagealign='" . $imagealign . "' WHERE sid = $idtype");
         $result = $xoopsDB->query($sql);
